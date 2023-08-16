@@ -1,0 +1,4 @@
+.container{
+	background: linear-gradient(to bottom, rgb(104, 101, 100) 1%, rgb(51, 51, 41)); 
+    min-height: 100%;
+}

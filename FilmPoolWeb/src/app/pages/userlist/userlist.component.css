@@ -1,0 +1,19 @@
+.users{
+    color: white;
+    font-size: 16x;
+    height: auto;
+}
+
+li{
+color: white;
+font-size: 16px;
+}
+.container{
+    display: flex;
+    justify-content: left;
+    width: 60%;
+}
+tr{
+    padding: 20px;
+    border: 1px solid white;
+}

@@ -1,0 +1,28 @@
+ul {
+    columns: 2;
+    column-count: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+  }
+
+  .selected{
+    color: #816587;
+}
+
+li{
+  font-size: 12px;
+  color: white;
+}
+li:hover{
+  cursor: pointer;
+}
+.filters{
+  border-right: 2px orange;
+  color: #ec4197;
+  
+}
+
+a{
+  text-decoration:none; 
+  color: #ec4197;
+}

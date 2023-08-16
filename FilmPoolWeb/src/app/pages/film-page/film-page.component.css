@@ -1,0 +1,31 @@
+.title {
+    color: #2199e8;
+}
+
+.header {
+    display: flex;
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+.film-container {
+    margin-left: 20%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.filminfo{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+input{
+    margin-bottom: 20px;
+}
+
+.card{
+    margin-left: 20%;
+}
+

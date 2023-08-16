@@ -1,0 +1,2 @@
+<input [(ngModel)]="query">
+<div *ngFor="let item of items | search:'title':query">{{item.title}}</div>

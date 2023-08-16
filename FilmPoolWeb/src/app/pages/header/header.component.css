@@ -1,0 +1,24 @@
+.headers {
+  display: flex;
+  flex-direction: row;
+  color: #ff1f71;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 10px;
+  padding-left: 25px;
+  padding-bottom: 10px;
+  height: 4vh;
+  border-bottom: 1px solid white;
+  font-size: 30px;
+  justify-content: space-between;
+}
+
+.new-row {
+  width: 80%;
+  height: 60px;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #534038;
+}

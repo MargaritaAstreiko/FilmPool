@@ -1,0 +1,37 @@
+<div class="{{showError==true?'alert-danger':'alert'}}" role="alert">
+    {{errorMessage}}
+</div>
+<div class="card">       
+    <div class="card-body">
+        <img src="/assets/lotos.png" alt="image" width="150px" height="150px">
+        <form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="loginUser(loginForm.value)">
+            <div>
+                <label for="username">Логин:</label>
+                <div>
+                    <input type="text" id="username" formControlName="username" />
+                </div>
+                <div>
+                    <em *ngIf="validateControl('username') && hasError('username', 'required')">Требуется логин</em>
+                </div>
+            </div>
+            <div>
+                <label for="password">Пароль:</label>
+                <div>
+                    <input type="password" id="password" formControlName="password"/>
+                </div>
+                <div>
+                    <em *ngIf="validateControl('password') && hasError('password', 'required')">Требуется пароль</em>
+                </div>
+            </div>
+            <div class="forgotPass">
+                <a (click)="toPass();"> Забыли пароль? </a>
+              </div>
+            <div>
+                <div class="btns">
+                    <button type="submit" class="btn-info" [disabled]="!loginForm.valid"><div>Вход</div></button>
+                    <button type="button" class="btn-info" (click)="toRegistration();"><div>Регистрация</div></button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>

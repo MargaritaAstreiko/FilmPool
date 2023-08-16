@@ -1,0 +1,42 @@
+<app-filmHeaders class='app-headers' #filmHeaders></app-filmHeaders>
+<div class="films-container">
+  <app-filmFilter class='app-filters' #filmFilter (genre)="filterGenre($event)"></app-filmFilter>
+  <div class="films-content">
+    <div class="searchform">
+      <label>
+        <input type="search" class="nosubmit" id="search-text" aria-describedby="search-text" [(ngModel)]="searchText"
+          placeholder="Поиск..." (ngModelChange)="onValueChanged($event)" autofocus>
+      </label>
+    </div>
+    <table class="table">
+      <tbody>
+        <tr *ngFor="let film of films | paginate: config">
+          <div class="film-info">
+            <div class="top">
+              <div class="film-title" (click)="toFilm(film.id);">{{film.title}}</div>
+              <div class="star-rating">
+                <div class="stars" *ngFor="let i of max">
+                  <input *ngIf="film.rating && film.rating>=i" type="radio" id="star{{i}}" name="rating" value="{{i}}"
+                    checked="true" />
+                  <label (click)="toggleRating(i,film.id)"
+                    [ngClass]="film.rating && film.rating>=i? 'checked-star':'non-checked-star'"
+                    for="star{{i}}"></label>
+                </div>
+              </div>
+            </div>
+            <td>
+              <div class="filmdetails" (click)="toFilm(film.id);">
+                <div class="year">Жанр {{genreConvention(film.genre)}} </div> 
+                <div class="year">Год {{film.year}} </div>
+              </div>
+              {{film.description}}
+            </td>
+            <td><img src={{film.picture}} alt="image" width="180px" height="130px"></td>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls id="basicPaginate" (pageChange)="pageChanged($event)" previousLabel="Предыдущая"
+      nextLabel="Следующая"></pagination-controls>
+  </div>
+</div>

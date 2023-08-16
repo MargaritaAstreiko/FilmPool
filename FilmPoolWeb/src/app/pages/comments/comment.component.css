@@ -1,0 +1,13 @@
+.comments{
+    margin-left: 20%;
+}
+ul {
+    list-style:none;
+}
+li{
+    background-color: pink;
+    width:60%;
+    margin-bottom: 12px;
+    padding: 6px;
+
+}
