@@ -22,7 +22,7 @@ import { HeaderComponent } from "../header/header.component";
 
 export class FilmComponent implements OnInit {
     film!: Film;
-    idInt=0
+    idInt = 0
     fileToUpload: File | null | undefined;
     url: any;
     isAdmin: boolean | undefined;
@@ -41,23 +41,24 @@ export class FilmComponent implements OnInit {
 
 
     ngOnInit() {
-        this.isAdmin=this._authService.isUserAdmin();
-        this.editMode=false;
+        this.isAdmin = this._authService.isUserAdmin();
+        this.editMode = false;
         this.filmcontent = new FormGroup({
             title: new FormControl(""),
             fileInput: new FormControl(''),
             year: new FormControl(''),
             description: new FormControl(''),
-      
-          })
+            duration: new FormControl(''),
+
+        })
         this.route.params.subscribe(params => {
             const id = params['id'];
             if (id) {
                 this.idInt = parseInt(id)
                 this._filmsService.getFilm(this.idInt).subscribe(data => {
                     this.film = data.film;
-                    this.rating= data.rating;
-                    this.url=this.film.picture?.length>0? `data:image/jpg;base64,${this.film.picture}`:"/assets/nofilm.png";
+                    this.rating = data.rating;
+                    this.url = this.film.picture?.length > 0 ? `data:image/jpg;base64,${this.film.picture}` : "/assets/nofilm.png";
                 }
                 )
             }
@@ -68,36 +69,62 @@ export class FilmComponent implements OnInit {
         //const target= event.target as HTMLInputElement;
         //this.fileToUpload = (target.files as FileList)[0];
         //this.fileToUpload = files.item(0);
-        this.fileToUpload= event.target.files[0]
-      if(this.fileToUpload?.name) {
-        
-        const fileReader: FileReader = new FileReader();
-        fileReader.readAsDataURL(this.fileToUpload);
-      
-        fileReader.onload = (event: any) => {
-          this.url = event.target.result;
-        };
-      let files=[]
-       files.push({ data: this.fileToUpload, fileName: this.fileToUpload.name });
-       let form = new FormData();
-       console.log(form)
-       form.append("file", this.fileToUpload);
-       console.log(form)
-        this._filmsService.picture(this.idInt,form)
-          .subscribe()
-    }
+        this.fileToUpload = event.target.files[0]
+        if (this.fileToUpload?.name) {
+
+            const fileReader: FileReader = new FileReader();
+            fileReader.readAsDataURL(this.fileToUpload);
+
+            fileReader.onload = (event: any) => {
+                this.url = event.target.result;
+            };
+        }
+
     };
 
-    enableEditMode(){
-        this.editMode=!this.editMode;
+    enableEditMode() {
+        this.editMode = !this.editMode;
     }
-    
-    addComment=(event:any)=>{
-        this.comment=event;
-     }
 
-     genreConvention=(genre:string)=>{
+    addComment = (event: any) => {
+        this.comment = event;
+    }
+
+    genreConvention = (genre: string) => {
         return Number(genre) in Genre ? Genre[Number(genre)] : undefined;
     }
-      
+
+    updateFilm = (filmValue: any) => {
+        this.enableEditMode(); 
+        const filmInfo = { ...filmValue };
+
+        const filmUpdateInfo: Film = {
+            id: this.film.id,
+            title: filmInfo.title,
+            year: filmInfo.year,
+            description: filmInfo.description,
+            duration: filmInfo.duration,
+            genre: filmInfo.genre,
+            rating: 0,
+            picture: ''
+        }
+
+        if (this.fileToUpload?.name) {
+
+            const fileReader: FileReader = new FileReader();
+            fileReader.readAsDataURL(this.fileToUpload);
+
+            fileReader.onload = (event: any) => {
+                this.url = event.target.result;
+            };
+            let files = []
+            files.push({ data: this.fileToUpload, fileName: this.fileToUpload.name });
+            let form = new FormData();
+            form.append("file", this.fileToUpload);
+            this._filmsService.picture(this.idInt, form)
+                .subscribe()
+        }
+        this._filmsService.updateFilm(filmUpdateInfo).subscribe()
+
+    }
 }

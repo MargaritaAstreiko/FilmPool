@@ -13,11 +13,8 @@
 </div>
 
 <div *ngIf="isAdmin&&editMode" class="card">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ec4197" class="bi bi-save-fill" viewBox="0 0 16 16">
-        <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z"/>
-      </svg>
 <div class="card-body">
-    <form [formGroup]="filmcontent">
+    <form [formGroup]="filmcontent" (ngSubmit)="updateFilm(filmcontent.value)">
         <div>
             <label for="title">Название:</label>
             <div>
@@ -33,11 +30,19 @@
             <div>
                 <input type="number" id="year" formControlName="year" class="form-control" min="1940" max="2045"  [(ngModel)]="film.year">
             </div>
+            <label for="duration">Продолжительность:</label>
+            <div>
+                <input type="text" id="duration" formControlName="duration" class="form-control"  [(ngModel)]="film.duration">
+            </div>
             <label for="description">Описание:</label>
             <div>
-                <input type="text" id="description" formControlName="description" class="form-control"  [(ngModel)]="film.description" />
+               <!--  <textarea id="description" class="text" cols="80" rows ="10" name="description"  [(ngModel)]="film.description" form="filmContent"></textarea>-->
+             <input type="text" id="description" formControlName="description" class="form-control"  [(ngModel)]="film.description" />
             </div>
         </div>
+        <button type="submit"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ec4197" class="bi bi-save-fill" viewBox="0 0 16 16">
+            <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z"/>
+          </svg></button>
     </form>
 </div>
 </div>

@@ -83,6 +83,8 @@ namespace Project.WebApi
       services.AddScoped<IGenresService, GenresService>();
       services.AddScoped<ICommentsService, CommentsService>();
       services.AddScoped<ICommentsRepository, CommentsRepository>();
+      services.AddScoped<ICollectionsService, CollectionsService>();
+      services.AddScoped<ICollectionsRepository, CollectionsRepository>();
       services.AddScoped<AuthService>();
       var mapperConfig = new MapperConfiguration(mc =>
       {

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../models/user.model';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { Collection } from '../models/collection.model';
+
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class CollectionsService {
   apiURL = 'https://localhost:5001/api';
   constructor(private http: HttpClient) {}
   httpOptions = {
@@ -15,9 +15,13 @@ export class UsersService {
     }),
   };
   // HttpClient API get() method => Fetch employees list
-  getUsers(): Observable<User[]> {
+  getCollection(userId:number): Observable<Collection[]> {
     return this.http
-      .get<User[]>(`${this.apiURL}/users`)
+      .post<Collection[]>(`${this.apiURL}/collections/user`,{currentPage:1,pageSize:0,userId:userId})
+  }
+  leaveComments(collection:Collection): Observable<boolean> {
+    return this.http
+      .post<boolean>(`${this.apiURL}/collections`,collection)
   }
 
 }

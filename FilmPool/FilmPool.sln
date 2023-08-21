@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmPool", "FilmPool.csproj", "{32AD63B2-FE9A-434D-9336-BC2BEC54AE48}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FileStorage", "..\FileStorage\FileStorage.vbproj", "{9AF7E039-E578-4443-90E5-8483C2F563DF}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "FileStorage", "FileStorage\FileStorage.vbproj", "{5B917FC9-67ED-489F-AFC2-B6E0C5AF401C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{32AD63B2-FE9A-434D-9336-BC2BEC54AE48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32AD63B2-FE9A-434D-9336-BC2BEC54AE48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32AD63B2-FE9A-434D-9336-BC2BEC54AE48}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9AF7E039-E578-4443-90E5-8483C2F563DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9AF7E039-E578-4443-90E5-8483C2F563DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9AF7E039-E578-4443-90E5-8483C2F563DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9AF7E039-E578-4443-90E5-8483C2F563DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B917FC9-67ED-489F-AFC2-B6E0C5AF401C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B917FC9-67ED-489F-AFC2-B6E0C5AF401C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B917FC9-67ED-489F-AFC2-B6E0C5AF401C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B917FC9-67ED-489F-AFC2-B6E0C5AF401C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

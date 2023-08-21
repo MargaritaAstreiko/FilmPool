@@ -29,6 +29,12 @@ export class FilmsService {
 
   }
 
+  updateFilm(film: Film): Observable<boolean>{
+    return this.http
+    .post<boolean>(`${this.apiURL}/films/${film.id}`,{...film})
+
+  }
+
   picture(id: number, file: FormData):Observable<boolean>{
     console.log(file)
     return this.http
@@ -36,51 +42,5 @@ export class FilmsService {
       tap(data => data)
     );
   }
-  /* HttpClient API get() method => Fetch employee
-  getEmployee(id: any): Observable<Employee> {
-    return this.http
-      .get<Employee>(this.apiURL + '/employees/' + id)
-      .pipe(retry(1), catchError(this.handleError));
-  }
-  // HttpClient API post() method => Create employee
-  createEmployee(employee: any): Observable<Employee> {
-    return this.http
-      .post<Employee>(
-        this.apiURL + '/employees',
-        JSON.stringify(employee),
-        this.httpOptions
-      )
-      .pipe(retry(1), catchError(this.handleError));
-  }
-  // HttpClient API put() method => Update employee
-  updateEmployee(id: any, employee: any): Observable<Employee> {
-    return this.http
-      .put<Employee>(
-        this.apiURL + '/employees/' + id,
-        JSON.stringify(employee),
-        this.httpOptions
-      )
-      .pipe(retry(1), catchError(this.handleError));
-  }
-  // HttpClient API delete() method => Delete employee
-  deleteEmployee(id: any) {
-    return this.http
-      .delete<Employee>(this.apiURL + '/employees/' + id, this.httpOptions)
-      .pipe(retry(1), catchError(this.handleError));
-  }
-  // Error handling
-  handleError(error: any) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    window.alert(errorMessage);
-    return throwError(() => {
-      return errorMessage;
-    });
-  }*/
+
 }
