@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="FileStorage\FileStorage.vbproj" />
+    <ProjectReference Include="..\FileStorage\FileStorage.vbproj" />
   </ItemGroup>
 
 </Project>
