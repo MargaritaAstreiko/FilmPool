@@ -1,17 +1,17 @@
 <div class="comments">
+    <button class="left-comment-btn" (click)="addComment()">Добавить комментарий</button>
     <div *ngIf="addNewComment" class="form-group">
-        <form [formGroup]="commentForm"  autocomplete="off" (ngSubmit)="saveComment(commentForm.value)">
-        <label for="commentText">Ваш комментарий</label>
-            <input type="text" id="commentText" formControlName="commentText" />
-        <button type="submit" class="btn-info"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#2199e8" class="bi bi-save-fill" viewBox="0 0 16 16">
-            <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z"/>
-          </svg></button>
+        <form id="newComment" autocomplete="off" (ngSubmit)="saveComment()">
+            <label for="commentText">Ваш комментарий</label>
+            <button type="submit" class="btn-info"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                    fill="#2199e8" class="bi bi-save-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z" />
+                </svg></button>
         </form>
-      </div>
-    <div class="commment">
-        <ul>
-            <li  *ngFor="let comment of comments">{{comment.comment}}</li>
-        </ul>
+        <textarea id="description" class="text" cols="80" rows ="10" name="description"  [(ngModel)]="commentText" form="newComment"></textarea>
     </div>
-    <button (click)="addComment()">Оставить комментарий</button>
+    <div *ngFor="let comment of comments" class="comment-row">{{comment.comment}}
+        <div>{{comment.createdDate}}</div>
     </div>
+</div>

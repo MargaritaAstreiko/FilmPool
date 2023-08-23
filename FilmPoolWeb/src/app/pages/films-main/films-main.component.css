@@ -38,6 +38,18 @@ margin-right: 50px;
   flex-direction: column;
 }
 
+.description {
+  padding-left: 10px;
+  font-size: 12px;
+  text-align: justify;
+}
+
+.film-main-content{
+  color: white;
+  display: flex;
+  flex-direction: row;
+}
+
 .top{
   display: flex;
   justify-content: space-between;
@@ -153,4 +165,8 @@ input.nosubmit {
 
 #basicPaginate ::ng-deep  .ngx-pagination .current{
   background-color: #ec4197!important;
+}
+
+#basicPaginate ::ng-deep .ngx-pagination a, .ngx-pagination button{
+  color: white!important;
 }

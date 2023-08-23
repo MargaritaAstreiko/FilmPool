@@ -9,44 +9,41 @@ import { CommentsService } from 'src/app/services/comments.service';
   styleUrls: ['./comment.component.css']
 })
 export class FilmCommentsComponent implements OnInit {
-    //@Output() comment = new EventEmitter<Comment>();
-    constructor(
-        private _commentsService: CommentsService
-    ) {}
-    
-    comments!: Comment[];
-    addNewComment=false;
-    commentForm!: FormGroup;
-    userId=localStorage.getItem("userId")||0;
-    @Input() filmId!: number;
+  //@Output() comment = new EventEmitter<Comment>();
+  constructor(
+    private _commentsService: CommentsService
+  ) { }
+
+  comments!: Comment[];
+  addNewComment = false;
+  commentText!: string;
+  commentForm!: FormGroup;
+  userId = localStorage.getItem("userId") || 0;
+  @Input() filmId!: number;
 
 
   ngOnInit() {
-    this.commentForm = new FormGroup({
-        commentText: new FormControl("")
-      })
-     this._commentsService.getComments(this.filmId).subscribe( data=>{
-      this.comments=data;
-     });
+    this._commentsService.getComments(this.filmId).subscribe(data => {
+      this.comments = data;
+    });
   }
-  addComment=()=>{
-    this.addNewComment=!this.addNewComment;
-   // this.comment.emit(comment);
+  
+  addComment = () => {
+    this.addNewComment = !this.addNewComment;
   }
 
-  saveComment = (commentValue:any) => {
-    const login = {... commentValue };
-
+  saveComment = () => {
+    this.addComment();
     const newComment: Comment = {
       id: 0,
       userId: +this.userId,
       filmId: this.filmId,
       createdDate: new Date(),
-      comment: commentValue.commentText
+      comment: this.commentText,
     }
     this._commentsService.leaveComments(newComment).subscribe();
-}
-  
+  }
+
 
 }
 

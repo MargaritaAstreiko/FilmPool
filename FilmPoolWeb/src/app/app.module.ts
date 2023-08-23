@@ -25,6 +25,7 @@ import { ResetPasswordComponent } from './pages/resetPassword/resetPassword.comp
 import { FilmComponent } from './pages/film-page/film-page.component';
 import { FilmCommentsComponent } from './pages/comments/comment.component';
 import { HeaderComponent } from './pages/header/header.component';
+import { CollectionComponent } from './pages/collection/collection.component';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -43,7 +44,8 @@ export function tokenGetter() {
     ResetPasswordComponent,
     HeaderComponent,
     FilmComponent,
-
+    CollectionComponent,
+    
   ],
   imports: [
     BrowserModule,

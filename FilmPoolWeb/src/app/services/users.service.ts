@@ -14,7 +14,7 @@ export class UsersService {
       'Content-Type': 'application/json',
     }),
   };
-  // HttpClient API get() method => Fetch employees list
+
   getUsers(): Observable<User[]> {
     return this.http
       .get<User[]>(`${this.apiURL}/users`)

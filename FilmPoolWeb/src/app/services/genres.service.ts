@@ -15,7 +15,7 @@ export class GenresService {
       'Content-Type': 'application/json',
     }),
   };
-  // HttpClient API get() method => Fetch employees list
+
   getGenres(): Observable<Genre[]> {
     return this.http
       .get<Genre[]>(`${this.apiURL}/genres`)

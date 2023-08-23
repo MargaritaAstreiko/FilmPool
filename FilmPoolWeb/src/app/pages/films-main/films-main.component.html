@@ -26,12 +26,15 @@
             </div>
             <td>
               <div class="filmdetails" (click)="toFilm(film.id);">
-                <div class="year">Жанр {{genreConvention(film.genre)}} </div> 
+                <div class="year">Жанр {{genreConvention(film.genre)}} </div>
                 <div class="year">Год {{film.year}} </div>
               </div>
-              {{film.description}}
             </td>
-            <td><img src={{film.picture}} alt="image" width="180px" height="130px"></td>
+            <td><div class="film-main-content"><img src={{film.picture}} alt="image" width="180px" height="130px">
+              <div class="description">
+                {{film.description}}</div>
+              </div>
+            </td>
           </div>
         </tr>
       </tbody>

@@ -8,6 +8,7 @@ import { ForgotPasswordComponent } from './pages/forgotPassword/forgot-password.
 import { RegisterUserComponent } from './pages/registration/registration.component';
 import { ResetPasswordComponent } from './pages/resetPassword/resetPassword.component';
 import { UserlistComponent } from './pages/userlist/userlist.component';
+import { CollectionComponent } from './pages/collection/collection.component';
 
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
     { path: 'films', component: FilmsListComponent, canActivate: [AuthGuard]},
     { path: 'film/:id', component: FilmComponent, canActivate: [AuthGuard]},
     { path: 'users', component: UserlistComponent, canActivate: [AuthGuard,AdminGuard]},
+    { path: 'collections', component: CollectionComponent, canActivate: [AuthGuard]},
     { path: 'forgotPassword', component: ForgotPasswordComponent },
     { path: 'resetPassword', component: ResetPasswordComponent },
     { path: 'login', component: LoginComponent },

@@ -10,75 +10,28 @@ namespace FilmPool.Controllers
     [ApiController]
     public class UserController : Controller
     {
-      IUserService _userService;
+        IUserService _userService;
 
-      public UserController(IUserService userService)
-      {
-      _userService = userService;
-      }
-
-      [HttpGet]
-      [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Get()
-      {
-       var users = await _userService.Get();
-       return Ok(users);
-      }
-
-      /*[HttpGet("{id}", Name = "GetTodoItem")]
-      public IActionResult Get(int Id)
-      {
-        TodoItem todoItem = TodoRepository.Get(Id); 
-
-        if (todoItem == null)
+        public UserController(IUserService userService)
         {
-          return NotFound();
+            _userService = userService;
         }
 
-        return new ObjectResult(todoItem);
-      }
-
-      [HttpPost]
-      public IActionResult Create([FromBody] TodoItem todoItem)
-      {
-        if (todoItem == null)
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Get()
         {
-          return BadRequest();
-        }
-        TodoRepository.Create(todoItem);
-        return CreatedAtRoute("GetTodoItem", new { id = todoItem.Id }, todoItem);
-      }
-
-      [HttpPut("{id}")]
-      public IActionResult Update(int Id, [FromBody] TodoItem updatedTodoItem)
-      {
-        if (updatedTodoItem == null || updatedTodoItem.Id != Id)
-        {
-          return BadRequest();
+            var users = await _userService.Get();
+            return Ok(users);
         }
 
-        var todoItem = TodoRepository.Get(Id);
-        if (todoItem == null)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUser(int Id)
         {
-          return NotFound();
+            var user = await _userService.Get(Id);
+            return Ok(user);
         }
 
-        TodoRepository.Update(updatedTodoItem);
-        return RedirectToRoute("GetAllItems");
-      }
 
-      [HttpDelete("{id}")]
-      public IActionResult Delete(int Id)
-      {
-        var deletedTodoItem = TodoRepository.Delete(Id);
-
-        if (deletedTodoItem == null)
-        {
-          return BadRequest();
-        }
-
-        return new ObjectResult(deletedTodoItem);
-      }
-    }*/
-  }
+    }
 }

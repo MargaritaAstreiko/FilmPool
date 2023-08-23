@@ -47,7 +47,6 @@ export class FilmComponent implements OnInit {
             title: new FormControl(""),
             fileInput: new FormControl(''),
             year: new FormControl(''),
-            description: new FormControl(''),
             duration: new FormControl(''),
 
         })
@@ -102,7 +101,7 @@ export class FilmComponent implements OnInit {
             id: this.film.id,
             title: filmInfo.title,
             year: filmInfo.year,
-            description: filmInfo.description,
+            description: this.film.description,
             duration: filmInfo.duration,
             genre: filmInfo.genre,
             rating: 0,

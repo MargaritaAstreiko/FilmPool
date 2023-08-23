@@ -1,13 +1,38 @@
-.comments{
+.comments {
     margin-left: 20%;
 }
-ul {
-    list-style:none;
-}
-li{
-    background-color: pink;
-    width:60%;
-    margin-bottom: 12px;
-    padding: 6px;
 
+
+.comment-row {
+    background-color: rgb(56, 56, 52);
+    width: 60%;
+    padding: 6px;
+    min-height: 60px;
+    width: 65%;
+    color: white;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.left-comment-btn {
+    padding: 14px 20px;
+    border-radius: 3px;
+    line-height: 0.3;
+    background: rgb(56, 56, 52);
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    position: relative;
+    transition: background-color .6s ease;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+label {
+    color: white;
 }

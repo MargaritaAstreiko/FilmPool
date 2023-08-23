@@ -14,11 +14,12 @@ export class CollectionsService {
       'Content-Type': 'application/json',
     }),
   };
-  // HttpClient API get() method => Fetch employees list
+
   getCollection(userId:number): Observable<Collection[]> {
     return this.http
       .post<Collection[]>(`${this.apiURL}/collections/user`,{currentPage:1,pageSize:0,userId:userId})
   }
+  
   leaveComments(collection:Collection): Observable<boolean> {
     return this.http
       .post<boolean>(`${this.apiURL}/collections`,collection)

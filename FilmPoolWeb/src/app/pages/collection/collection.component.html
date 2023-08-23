@@ -1,1 +1,15 @@
-<p>collection works!</p>
+<app-filmHeaders class='app-headers' #filmHeaders></app-filmHeaders>
+<div>Коллекции</div>
+<button (click)="newCollection()">Создать коллекцию</button>
+<div *ngIf="addNewCollection" class="form-group">
+    <form [formGroup]="collectionInfo"  autocomplete="off" (ngSubmit)="saveCollection(collectionInfo.value)">
+    <label for="collectionName">Название коллекции</label>
+        <input type="text" id="collectionName" formControlName="collectionName" />
+        <label for="collectionItem">Фильм</label>    
+        <select name="collectionItem">
+            <option *ngFor="let film of films"  value="film">{{film.title}}</option>
+           </select> 
+    <button type="submit" class="btn-info"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#2199e8" class="bi bi-save-fill" viewBox="0 0 16 16">
+        <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z"/>
+      </svg></button>
+    </form>

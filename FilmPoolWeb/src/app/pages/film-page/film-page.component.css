@@ -1,5 +1,5 @@
 .title {
-    color: #2199e8;
+    color: white;
 }
 
 .header {
@@ -15,11 +15,13 @@
     color: white;
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
 }
 
 .filminfo{
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
 }
 input{
     margin-bottom: 20px;
@@ -29,3 +31,32 @@ input{
     margin-left: 20%;
 }
 
+.filminfo-desc{
+    background-color: rgb(56, 56, 52);
+    width:60%;
+    padding: 20px;
+    border: 1px solid white;
+    margin-top: 20px;
+}
+
+.card-body{
+    margin-top: 20px;
+}
+
+label{
+    color: white;
+}
+
+
+input{
+    border-radius: 0.25rem;
+ }
+ 
+ input:focus{
+    border: 1px solid rgb(221, 150, 19);
+}
+
+form button {
+    background-color: #ec4197;
+    margin-top: 10px;
+}

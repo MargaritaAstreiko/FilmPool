@@ -14,11 +14,12 @@ export class CommentsService {
       'Content-Type': 'application/json',
     }),
   };
-  // HttpClient API get() method => Fetch employees list
+
   getComments(filmId:number): Observable<Comment[]> {
     return this.http
       .post<Comment[]>(`${this.apiURL}/comments/film`,{currentPage:1,pageSize:0,filmId: filmId})
   }
+
   leaveComments(comment:Comment): Observable<boolean> {
     return this.http
       .post<boolean>(`${this.apiURL}/comments`,comment)

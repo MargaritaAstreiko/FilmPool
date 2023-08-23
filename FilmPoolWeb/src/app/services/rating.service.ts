@@ -14,7 +14,7 @@ export class RatingService {
       'Content-Type': 'application/json',
     }),
   };
-  // HttpClient API get() method => Fetch employees list
+
   putRating(rating: Rating): Observable<boolean> {
     return this.http
       .post<boolean>(`${this.apiURL}/rating`,rating)

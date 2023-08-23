@@ -17,7 +17,7 @@ export class FilmsService {
       'Authorization', `Bearer ${this.token}`
     )
 
-  // HttpClient API get() method => Fetch employees list
+
   getFilms(pageSize: number, currentPage: number, search: string, genre?: Genre): Observable<FilmResponseModel> {
     return this.http
       .post<FilmResponseModel>(`${this.apiURL}/films`,{pageSize:pageSize,currentPage:currentPage, search:search, genre:genre})
