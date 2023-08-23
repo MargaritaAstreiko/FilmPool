@@ -19,14 +19,14 @@ import { HeaderComponent } from "../header/header.component";
 
 
 
-export class FilmsListComponent implements OnInit{
+export class FilmsListComponent implements OnInit {
     films!: Film[];
-    isAdmin=false;
+    isAdmin = false;
     config: any;
-    pageSize=3;
-    currentPage=1;
-    searchText='';
-    max=[1,2,3,4,5,6,7,8,9,10];
+    pageSize = 3;
+    currentPage = 1;
+    searchText = '';
+    max = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     genre: Genre | undefined;
     @ViewChild('filmFilter') child: FilmFilterComponent | undefined;
     @ViewChild('filmHeasers') secchild: HeaderComponent | undefined;
@@ -34,93 +34,92 @@ export class FilmsListComponent implements OnInit{
         private _filmsService: FilmsService,
         private _ratingService: RatingService,
         private _authService: AuthenticationService,
-        private router: Router, 
+        private router: Router,
         private route: ActivatedRoute
 
-    ) {}
-    
-  
+    ) { }
+
+
     ngOnInit() {
-       this.isAdmin=this._authService.isUserAdmin();
-       this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe( data=>{
-        this.films=data.films.map(i=>{
-            i.picture= i.picture?.length>0? `data:image/jpg;base64,${i.picture}`:"/assets/nofilm.png";
-            return i 
-          
+        this.isAdmin = this._authService.isUserAdmin();
+        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe(data => {
+            this.films = data.films.map(i => {
+                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
+                return i
+
+            });
+            this.config = {
+                id: 'basicPaginate',
+                itemsPerPage: this.pageSize,
+                currentPage: this.currentPage ? this.currentPage : 1,
+                totalItems: data.totalFilms
+            }
         });
-        this.config={
-        id: 'basicPaginate',
-        itemsPerPage: this.pageSize,
-        currentPage: 1,
-        totalItems: data.totalFilms
-        }
-       });
     }
 
     pageChanged(event: any) {
         this.config.currentPage = event;
-        this._filmsService.getFilms(this.pageSize, event, this.searchText, this.genre).subscribe( data=>{
-            this.films=data.films.map(i=>{
-                i.picture= i.picture?.length>0? `data:image/jpg;base64,${i.picture}`:"/assets/nofilm.png";
-                return i 
-              
+        this.currentPage = event;
+        this._filmsService.getFilms(this.pageSize, event, this.searchText, this.genre).subscribe(data => {
+            this.films = data.films.map(i => {
+                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
+                return i
+
             });
-            this.config.totalItems=data.totalFilms;
-      })
+            this.config.totalItems = data.totalFilms;
+        })
     }
 
-    onValueChanged(event: any){
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe( data=>{
-            this.films=data.films.map(i=>{
-                i.picture= i.picture?.length>0? `data:image/jpg;base64,${i.picture}`:"/assets/nofilm.png";
-                return i 
-              
+    onValueChanged(event: any) {
+        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe(data => {
+            this.films = data.films.map(i => {
+                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
+                return i
+
             });
-            this.config.totalItems=data.totalFilms;
-      })
+            this.config.totalItems = data.totalFilms;
+        })
     }
 
-    toFilm(id:number){
-        this.router.navigate(['film',id], {
-           // queryParams: { id: id }
-          }); 
-    }
-
-    filterGenre=(event:any)=>{
-       this.genre=event;
-       this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe( data=>{
-        this.films=data.films.map(i=>{
-            i.picture= i.picture?.length>0? `data:image/jpg;base64,${i.picture}`:"/assets/nofilm.png";
-            return i 
-          
+    toFilm(id: number) {
+        this.router.navigate(['film', id], {
+            // queryParams: { id: id }
         });
-        this.config.totalItems=data.totalFilms;
-  })
     }
 
-    toggleRating=(i:number, filmId: number)=>{
-       let userId=localStorage.getItem("userId");
-       console.log(filmId)
-       let uid=userId && userId?.length>0? +userId: 0;
-        const rating={
-            id:0,
+    filterGenre = (event: any) => {
+        this.genre = event;
+        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe(data => {
+            this.films = data.films.map(i => {
+                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
+                return i
+
+            });
+            this.config.totalItems = data.totalFilms;
+        })
+    }
+
+    toggleRating = (i: number, filmId: number) => {
+        let userId = localStorage.getItem("userId");
+        let uid = userId && userId?.length > 0 ? +userId : 0;
+        const rating = {
+            id: 0,
             filmId,
-            userId:uid,
-            score:i,
+            userId: uid,
+            score: i,
         }
         this._ratingService.putRating(rating).subscribe();
 
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe( data=>{
-            this.films=data.films.map(i=>{
-                i.picture= i.picture?.length>0? `data:image/jpg;base64,${i.picture}`:"/assets/nofilm.png";
-                return i 
-              
+        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe(data => {
+            this.films = data.films.map(i => {
+                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
+                return i
+
             });
-      })
+        })
     }
 
-    genreConvention=(genre:string)=>{
+    genreConvention = (genre: string) => {
         return Number(genre) in Genre ? Genre[Number(genre)] : undefined;
     }
 }
-  
