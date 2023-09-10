@@ -1,6 +1,7 @@
 ﻿using FilmPool.DbModels;
 using FilmPool.Repositories;
 using FilmPool.RequestModels;
+using FilmPool.ResponseModels;
 
 namespace FilmPool.Services
 {
@@ -18,9 +19,16 @@ namespace FilmPool.Services
             return await _collectionsRepository.Create(comment);
         }
 
-        public async Task<IEnumerable<Collections>>GetCollections(int userId)
+        public async Task<IEnumerable<CollectionsResponseModel>>GetCollections(int userId)
         {
             return await _collectionsRepository.GetCollections(userId);
         }
+
+        public async Task<bool> AddToCollection(FilmsInCollections filmsAdd)
+        {
+            return await _collectionsRepository.AddToCollection(filmsAdd);
+        }
+
+
     }
 }

@@ -18,45 +18,82 @@
     margin-bottom: 20px;
 }
 
-.filminfo{
+.filminfo {
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 13px;
 }
-input{
+
+input {
     margin-bottom: 20px;
 }
 
-.card{
+.card {
     margin-left: 20%;
 }
 
-.filminfo-desc{
+.filminfo-desc {
     background-color: rgb(56, 56, 52);
-    width:60%;
+    width: 60%;
     padding: 20px;
     border: 1px solid white;
     margin-top: 20px;
 }
 
-.card-body{
+.card-body {
     margin-top: 20px;
 }
 
-label{
+label {
     color: white;
 }
 
 
-input{
+input {
     border-radius: 0.25rem;
- }
- 
- input:focus{
+}
+
+input:focus {
     border: 1px solid rgb(221, 150, 19);
 }
 
 form button {
     background-color: #ec4197;
     margin-top: 10px;
+}
+
+.btn {
+    padding: 14px 20px;
+    border-radius: 3px;
+    line-height: 0.3;
+    background: rgb(56, 56, 52);
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    position: relative;
+    transition: background-color .6s ease;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+ .film {
+   height: 93.5vh;
+    overflow-y: scroll;
+     z-index:1;
+    scrollbar-color: #999 #333;
+}
+
+ .film::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.film::-webkit-scrollbar-thumb {
+    background: #999;
+}
+
+.film::-webkit-scrollbar-track {
+    background: #333;
 }

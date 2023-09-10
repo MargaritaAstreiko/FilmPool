@@ -1,48 +1,82 @@
 <app-filmHeaders class='app-headers' #filmHeaders></app-filmHeaders>
-<div *ngIf="!(isAdmin&&editMode)" class="film-container">
-   <div class="header"><div class="title">{{film.title}}</div><svg *ngIf="isAdmin" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange" class="bi bi-pencil-fill" (click)="enableEditMode()" viewBox="0 0 16 16">
-    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-  </svg></div>
+<div class="film">
+    <div class="add-collection">
+        <!-- <form [formGroup]="collectionInfo"  autocomplete="off" (ngSubmit)="saveCollection(collectionInfo.value)">
 
-    <img [src]="url" height="200" width="240" *ngIf="url">
-    <div class="filminfo">Жанр: {{genreConvention(film.genre)}}</div>
-    <div class="filminfo">Год: {{film.year}}</div>
-    <div class="filminfo">Рейтинг: {{rating}}</div>
-    <div class="filminfo-desc">{{film.description}}</div>
-</div>
-
-<div *ngIf="isAdmin&&editMode" class="card">
-<div class="card-body">
-    <form [formGroup]="filmcontent" id="filmcontent" (ngSubmit)="updateFilm(filmcontent.value)">
-        <button type="submit"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-save-fill" viewBox="0 0 16 16">
+        <button type="submit" > <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#2199e8" class="bi bi-save-fill" viewBox="0 0 16 16">
             <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z"/>
           </svg></button>
-        <div>
-            <label for="title">Название:</label>
-            <div>
-                <input type="text" id="title" formControlName="title" class="form-control" [(ngModel)]="film.title"/>
-            </div>
-            <label for="fileInput">Избражение:</label>
-            <img [src]="url" height="200" *ngIf="url">
-            <div>
-                <input #fileInput id="fileInput" type='file' value="" (change)="onSelectFile($event)"
-                    accept=".jpg, .jpeg, .png">
-            </div>
-            <label for="year">Год:</label>
-            <div>
-                <input type="number" id="year" formControlName="year" class="form-control" min="1940" max="2045"  [(ngModel)]="film.year">
-            </div>
-            <label for="duration">Продолжительность:</label>
-            <div>
-                <input type="text" id="duration" formControlName="duration" class="form-control"  [(ngModel)]="film.duration">
-            </div>
-            <label for="description">Описание:</label>
-            <div>
-                           <!-- <input type="text" id="description" formControlName="description" class="form-control"  [(ngModel)]="film.description" />-->
-            </div>
+    
+        </form>
+    <div>-->
+
+        <button class="btn" *ngIf="!addToCollection" (click)="addFilmToCollection()">Добавить в коллекцию</button>
+    </div>
+    <div *ngIf="addToCollection">
+        <label for="collectionName">Название коллекции</label>
+        <select name="collectionItem" [ngModel]="collection | json">
+            <option *ngFor="let collection of collections" [ngValue]="collection| json">{{collection.collectionName}}
+            </option>
+        </select>
+        <button class="btn" (click)="saveToCollection()">Добавить</button>
+    </div>
+    <div *ngIf="!(isAdmin&&editMode)" class="film-container">
+        <div class="header">
+            <div class="title">{{film.title}}</div><svg *ngIf="isAdmin" xmlns="http://www.w3.org/2000/svg" width="20"
+                height="20" fill="orange" class="bi bi-pencil-fill" (click)="enableEditMode()" viewBox="0 0 16 16">
+                <path
+                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+            </svg>
         </div>
-    </form>
-    <textarea id="description" class="text" cols="80" rows ="10" name="description"  [(ngModel)]="film.description" form="filmContent"></textarea>
-</div>
-</div>
-<app-filmComments class='app-comments' [filmId]="film.id" #filmComments (comment)="addComment($event)"></app-filmComments>
+
+        <img [src]="url" height="200" width="240" *ngIf="url">
+        <div class="filminfo">Жанр: {{genreConvention(film.genre)}}</div>
+        <div class="filminfo">Год: {{film.year}}</div>
+        <div class="filminfo">Рейтинг: {{rating}}</div>
+        <div class="filminfo-desc">{{film.description}}</div>
+  <app-video-player #filmVideoPlayer></app-video-player>
+    </div>
+
+    <div *ngIf="isAdmin&&editMode" class="card">
+        <div class="card-body">
+            <form [formGroup]="filmcontent" id="filmcontent" (ngSubmit)="updateFilm(filmcontent.value)">
+                <button type="submit"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
+                        class="bi bi-save-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z" />
+                    </svg></button>
+                <div>
+                    <label for="title">Название:</label>
+                    <div>
+                        <input type="text" id="title" formControlName="title" class="form-control"
+                            [(ngModel)]="film.title" />
+                    </div>
+                    <label for="fileInput">Избражение:</label>
+                    <img [src]="url" height="200" *ngIf="url">
+                    <div>
+                        <input #fileInput id="fileInput" type='file' value="" (change)="onSelectFile($event)"
+                            accept=".jpg, .jpeg, .png">
+                    </div>
+                    <label for="year">Год:</label>
+                    <div>
+                        <input type="number" id="year" formControlName="year" class="form-control" min="1940" max="2045"
+                            [(ngModel)]="film.year">
+                    </div>
+                    <label for="duration">Продолжительность:</label>
+                    <div>
+                        <input type="text" id="duration" formControlName="duration" class="form-control"
+                            [(ngModel)]="film.duration">
+                    </div>
+                    <label for="description">Описание:</label>
+                    <div>
+                    </div>
+                </div>
+            </form>
+            <textarea id="description" class="text" cols="80" rows="10" name="description"
+                [(ngModel)]="film.description" form="filmContent"></textarea>
+        </div>
+    </div>
+    <app-filmComments class='app-comments' [filmId]="film.id" #filmComments
+        (comment)="addComment($event)"></app-filmComments>
+    <div>
+    </div>

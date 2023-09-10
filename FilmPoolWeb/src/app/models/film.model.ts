@@ -1,6 +1,3 @@
-import { DecimalPipe } from "@angular/common";
-import { Genre } from "../enums/genre.enum";
-
 export class Film {
     id!: number;
     title!: string;

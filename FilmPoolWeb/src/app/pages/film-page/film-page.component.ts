@@ -9,7 +9,10 @@ import { ActivatedRoute } from "@angular/router";
 import { FileModel } from "src/app/models/file.model";
 import { FilmCommentsComponent } from "../comments/comment.component";
 import { Comment } from 'src/app/models/comment.model';
-import { HeaderComponent } from "../header/header.component";
+import { HeaderComponent } from "../../shared/header/header.component";
+import { CollectionsService } from "src/app/services/collections.services";
+import { Collection } from "src/app/models/collection.model";
+import { VideoPlayerComponent } from "src/app/shared/video-player/video-player.component";
 
 @Component({
     selector: '.app-filmpool-film-page',
@@ -30,12 +33,18 @@ export class FilmComponent implements OnInit {
     filmcontent!: FormGroup;
     rating: number | undefined;
     comment!: Comment;
+    collections!: Collection[];
+    collection!: Collection;
+    addToCollection=false;
     @ViewChild('filmComments') child: FilmCommentsComponent | undefined;
-    @ViewChild('filmHeasers') secchild: HeaderComponent | undefined;
+    @ViewChild('filmVideoPlayer') thchild: VideoPlayerComponent| undefined;
+    @ViewChild('filmHeaders') secchild: HeaderComponent | undefined;
+    userId = localStorage.getItem("userId") || 0;
 
     constructor(
         private _filmsService: FilmsService,
         private _authService: AuthenticationService,
+        private _collectionsService: CollectionsService,
         private route: ActivatedRoute
     ) { }
 
@@ -50,6 +59,10 @@ export class FilmComponent implements OnInit {
             duration: new FormControl(''),
 
         })
+        this._collectionsService.getCollection(+this.userId).subscribe(data =>{
+            this.collections=data;
+            this.collection=this.collections[0];
+          });
         this.route.params.subscribe(params => {
             const id = params['id'];
             if (id) {
@@ -88,7 +101,9 @@ export class FilmComponent implements OnInit {
     addComment = (event: any) => {
         this.comment = event;
     }
-
+    addFilmToCollection=()=>{
+        this.addToCollection=!this.addToCollection;
+    }
     genreConvention = (genre: string) => {
         return Number(genre) in Genre ? Genre[Number(genre)] : undefined;
     }
@@ -126,4 +141,15 @@ export class FilmComponent implements OnInit {
         this._filmsService.updateFilm(filmUpdateInfo).subscribe()
 
     }
+
+    saveToCollection = () => {
+        const newCollection: Collection={
+          id:0,
+          collectionName: this.collection.collectionName,
+          userId: +this.userId,
+          filmId:this.film.id,
+          createdDate: new Date()
+        }
+        this._collectionsService.createCollection(newCollection).subscribe();
+      }
 }

@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit, ViewChild } from "@angular/core";
+import { Component, HostListener, NgModule, OnInit, ViewChild } from "@angular/core";
 import { Genre } from "src/app/enums/genre.enum";
 import { Film } from "src/app/models/film.model";
 import { FilmsService } from "src/app/services/films.service";
@@ -8,7 +8,7 @@ import { AuthenticationService } from "src/app/services/authentication.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RatingService } from "src/app/services/rating.service";
 import { Rating } from "src/app/models/rating.model";
-import { HeaderComponent } from "../header/header.component";
+import { HeaderComponent } from "../../shared/header/header.component";
 
 @Component({
     selector: '.app-filmpool-main-page',
@@ -26,6 +26,7 @@ export class FilmsListComponent implements OnInit {
     pageSize = 3;
     currentPage = 1;
     searchText = '';
+    getScreenHeight!: number
     max = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     genre: Genre | undefined;
     @ViewChild('filmFilter') child: FilmFilterComponent | undefined;
@@ -42,6 +43,27 @@ export class FilmsListComponent implements OnInit {
 
     ngOnInit() {
         this.isAdmin = this._authService.isUserAdmin();
+        this.getScreenHeight = window.innerHeight;
+        this.determinePageSize(this.getScreenHeight);
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onWindowResize() {
+        this.getScreenHeight = window.innerHeight;
+        this.determinePageSize(this.getScreenHeight);
+    }
+
+    determinePageSize(size: number) {
+        if (size > 1100 && size <= 1400) {
+            this.pageSize = 4
+        }
+        if (size <= 1100 && size > 800) {
+            this.pageSize = 3
+        }
+        if (size <= 800) {
+            this.pageSize = 2
+        }
+
         this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe(data => {
             this.films = data.films.map(i => {
                 i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";

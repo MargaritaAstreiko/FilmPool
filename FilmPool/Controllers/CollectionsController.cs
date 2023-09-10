@@ -25,11 +25,18 @@ namespace FilmPool.Controllers
             return Ok();
         }
 
-        [HttpPost("user")]
-        public async Task<IActionResult> GetCollections([FromBody] CollectionRequestModel collection)
+        [HttpGet("user{id}")]
+        public async Task<IActionResult> GetCollections(int id)
         {
-            var collections = await _collectionsService.GetCollections(collection.UserId);
+            var collections = await _collectionsService.GetCollections(id);
             return Ok(collections);
+        }
+
+        [HttpPost("addFilm")]
+        public async Task<IActionResult> AddToCollection([FromBody] FilmsInCollections filmsAdd)
+        {
+            var res = await _collectionsService.AddToCollection(filmsAdd);
+            return Ok();
         }
     }
 }

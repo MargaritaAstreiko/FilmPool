@@ -20,7 +20,9 @@
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
     "@auth0/angular-jwt": "^5.1.2",
+    "ngx-bootstrap-icons": "^1.9.2",
     "ngx-pagination": "^6.0.3",
+    "plyr": "^3.7.8",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
@@ -29,6 +31,7 @@
     "@angular-devkit/build-angular": "^15.0.1",
     "@angular/cli": "~15.0.1",
     "@angular/compiler-cli": "^15.0.0",
+    "@types/core-js": "^2.5.5",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",

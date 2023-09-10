@@ -1,5 +1,6 @@
 using FilmPool.DbModels;
 using FilmPool.RequestModels;
+using FilmPool.ResponseModels;
 
 namespace FilmPool.Repositories
 {
@@ -7,6 +8,6 @@ namespace FilmPool.Repositories
   {
     Task<Comments> Get(int Id);
     Task<bool> Create(CommentRequestModel comment);
-    Task<IEnumerable<Comments>> GetComments(int filmId);
+    Task<IEnumerable<CommentsResponseModel>> GetComments(int filmId);
   }
 }

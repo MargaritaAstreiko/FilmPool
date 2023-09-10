@@ -170,3 +170,7 @@ input.nosubmit {
 #basicPaginate ::ng-deep .ngx-pagination a, .ngx-pagination button{
   color: white!important;
 }
+
+table{
+  margin-bottom: 40px;
+}

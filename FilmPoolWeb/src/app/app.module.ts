@@ -24,8 +24,12 @@ import { ForgotPasswordComponent } from './pages/forgotPassword/forgot-password.
 import { ResetPasswordComponent } from './pages/resetPassword/resetPassword.component';
 import { FilmComponent } from './pages/film-page/film-page.component';
 import { FilmCommentsComponent } from './pages/comments/comment.component';
-import { HeaderComponent } from './pages/header/header.component';
+import { HeaderComponent } from './shared/header/header.component';
 import { CollectionComponent } from './pages/collection/collection.component';
+import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
+import { VideoPlayerComponent } from './shared/video-player/video-player.component';
+
+
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -45,6 +49,7 @@ export function tokenGetter() {
     HeaderComponent,
     FilmComponent,
     CollectionComponent,
+    VideoPlayerComponent,
     
   ],
   imports: [
@@ -54,6 +59,7 @@ export function tokenGetter() {
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxBootstrapIconsModule.pick(allIcons),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

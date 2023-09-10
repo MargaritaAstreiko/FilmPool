@@ -6,6 +6,7 @@ import { Film } from '../models/film.model';
 import { FilmResponseModel } from '../models/filmsResponseModel';
 import { Genre } from '../enums/genre.enum';
 import { FilmInfo } from '../models/film-info.model';
+import { FilmLightModel } from '../models/filmLight.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -42,5 +43,12 @@ export class FilmsService {
       tap(data => data)
     );
   }
+
+  getFilmsLight(): Observable<FilmLightModel[]>{
+    return this.http
+    .get<FilmLightModel[]>(`${this.apiURL}/films/Light`,)
+
+  }
+
 
 }

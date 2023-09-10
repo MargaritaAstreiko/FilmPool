@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
-import { HeaderComponent } from '../header/header.component';
+import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
   selector: 'app-userlist',

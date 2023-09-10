@@ -26,6 +26,7 @@ namespace FilmPool.Data.Schemas
       builder.Property(t => t.Duration).HasColumnName("Duration").HasMaxLength(30);
       builder.Property(t => t.Description).HasColumnName("Description");
       builder.Property(t => t.Picture).HasColumnName("Picture");
+      builder.Property(t => t.FilmUrl).HasColumnName("FilmUrl");
       builder.HasData(SeedFilmData());
       builder.HasMany(t => t.Ratings)
         .WithOne(x => x.Film)

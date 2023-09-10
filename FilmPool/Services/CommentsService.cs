@@ -1,6 +1,7 @@
 using FilmPool.DbModels;
 using FilmPool.Repositories;
 using FilmPool.RequestModels;
+using FilmPool.ResponseModels;
 
 namespace FilmPool.Services
 {
@@ -18,7 +19,7 @@ namespace FilmPool.Services
       return await _commentsRepository.Create(comment);
     }
 
-    public async Task<IEnumerable<Comments>> GetComments(int filmId)
+    public async Task<IEnumerable<CommentsResponseModel>> GetComments(int filmId)
     {
       return await _commentsRepository.GetComments(filmId);
     }

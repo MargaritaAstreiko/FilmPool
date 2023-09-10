@@ -2,8 +2,10 @@ using FilmPool.Data;
 using FilmPool.DbModels;
 using FilmPool.Migrations;
 using FilmPool.RequestModels;
+using FilmPool.ResponseModels;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace FilmPool.Repositories
 {
@@ -31,9 +33,21 @@ namespace FilmPool.Repositories
       await Context.SaveChangesAsync();
       return true;
     }
-    public async Task<IEnumerable<Comments>>GetComments(int filmId)
+    public async Task<IEnumerable<CommentsResponseModel>>GetComments(int filmId)
     {
-      return await Context.Comments.Where(x=>x.FilmId==filmId).ToListAsync();
+      return await Context.Comments.Where(x=>x.FilmId==filmId)
+                .Select(x=> new CommentsResponseModel
+                {
+                    Id = x.Id,
+                    Comment = x.Comment,
+                    CreatedDate = x.CreatedDate.ToString("g", new CultureInfo("de-CH")),
+                    FilmId =x.FilmId,
+                    UserId=x.UserId,
+                    Film=x.Film,
+                    User=x.User
+
+                })
+                .ToListAsync();
     }
   }
 }

@@ -17,10 +17,10 @@ export class CollectionsService {
 
   getCollection(userId:number): Observable<Collection[]> {
     return this.http
-      .post<Collection[]>(`${this.apiURL}/collections/user`,{currentPage:1,pageSize:0,userId:userId})
+      .get<Collection[]>(`${this.apiURL}/collections/user${userId}`)
   }
-  
-  leaveComments(collection:Collection): Observable<boolean> {
+
+  createCollection(collection:Collection): Observable<boolean> {
     return this.http
       .post<boolean>(`${this.apiURL}/collections`,collection)
   }

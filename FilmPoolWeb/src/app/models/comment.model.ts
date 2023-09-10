@@ -3,5 +3,5 @@ export class Comment {
     userId!: number;
     filmId!: number; 
     comment!: string;
-    createdDate!: Date;
+    createdDate!: Date|string;
 }
