@@ -24,9 +24,14 @@ namespace FilmPool.Services
             return await _collectionsRepository.GetCollections(userId);
         }
 
-        public async Task<bool> AddToCollection(FilmsInCollections filmsAdd)
+        public async Task<bool> AddToCollection(FilmsInCollectionsRequest filmsAdd)
         {
             return await _collectionsRepository.AddToCollection(filmsAdd);
+        }
+
+        public async Task<Collections> Delete(int Id)
+        {
+            return await _collectionsRepository.Delete(Id);
         }
 
 

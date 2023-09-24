@@ -13,6 +13,7 @@ import { HeaderComponent } from "../../shared/header/header.component";
 import { CollectionsService } from "src/app/services/collections.services";
 import { Collection } from "src/app/models/collection.model";
 import { VideoPlayerComponent } from "src/app/shared/video-player/video-player.component";
+import { FilmToCollection } from 'src/app/models/filmAddToCollection.model';
 
 @Component({
     selector: '.app-filmpool-film-page',
@@ -143,13 +144,11 @@ export class FilmComponent implements OnInit {
     }
 
     saveToCollection = () => {
-        const newCollection: Collection={
-          id:0,
-          collectionName: this.collection.collectionName,
-          userId: +this.userId,
+        const FilmToCollection: FilmToCollection={
+          collectionId: this.collection.id,
           filmId:this.film.id,
-          createdDate: new Date()
+          addededDate: new Date()
         }
-        this._collectionsService.createCollection(newCollection).subscribe();
+        this._collectionsService.addToCollection(FilmToCollection).subscribe();
       }
 }

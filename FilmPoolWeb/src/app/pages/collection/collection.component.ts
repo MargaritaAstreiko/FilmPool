@@ -18,6 +18,7 @@ export class CollectionComponent implements OnInit {
   addNewCollection = false;
   collections!: Collection[];
   filmSelected!: FilmLightModel;
+  activeCollection!: number;
   userId = localStorage.getItem("userId") || 0;
 
   constructor(
@@ -30,6 +31,7 @@ export class CollectionComponent implements OnInit {
     });
     this.collectionInfo = new FormGroup({
       collectionName: new FormControl(""),
+      isPublic: new FormControl(""),
       //  collectionItem: new FormControl(""),
     })
   }
@@ -41,7 +43,9 @@ export class CollectionComponent implements OnInit {
       collectionName: name.collectionName,
       userId: +this.userId,
       filmId: 0,
-      createdDate: new Date()
+      createdDate: new Date(),
+      isPublic: !name.isPublic,
+      filmNames:[],
     }
     this._collectionsService.createCollection(newCollection).subscribe();
     this._collectionsService.getCollection(+this.userId).subscribe(data => {
@@ -49,8 +53,17 @@ export class CollectionComponent implements OnInit {
     });
   }
 
+  activateCollection = (id: number) => {
+    this.activeCollection = id;
+
+  }
   newCollection = () => {
     this.addNewCollection = !this.addNewCollection;
+  }
+
+  removeCollection = (id: number) => {
+    this._collectionsService.removeCollection(id).subscribe();
+
   }
 }
 

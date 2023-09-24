@@ -4,4 +4,6 @@ export class Collection {
     filmId!: number; 
     collectionName!: string;
     createdDate!: Date;
+    isPublic!: boolean;
+    filmNames!: string[];
 }

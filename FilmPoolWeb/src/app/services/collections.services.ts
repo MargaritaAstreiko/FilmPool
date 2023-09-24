@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Collection } from '../models/collection.model';
+import { FilmToCollection } from '../models/filmAddToCollection.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,16 @@ export class CollectionsService {
   createCollection(collection:Collection): Observable<boolean> {
     return this.http
       .post<boolean>(`${this.apiURL}/collections`,collection)
+  }
+
+  addToCollection( addFilm: FilmToCollection): Observable<boolean>{
+    return this.http.post<boolean>(`${this.apiURL}/collections/addFilm`, addFilm)
+
+  }
+
+  removeCollection( id: number): Observable<boolean>{
+    return this.http.delete<boolean>(`${this.apiURL}/collections/${id}`)
+
   }
 
 }

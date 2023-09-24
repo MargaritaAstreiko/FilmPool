@@ -8,7 +8,8 @@ namespace FilmPool.Services
     {
         Task<bool> Create(CollectionRequestModel comment);
         Task<IEnumerable<CollectionsResponseModel>> GetCollections(int userId);
-        Task<bool> AddToCollection(FilmsInCollections filmsAdd);
+        Task<bool> AddToCollection(FilmsInCollectionsRequest filmsAdd);
+        Task<Collections> Delete(int Id);
 
     }
 }

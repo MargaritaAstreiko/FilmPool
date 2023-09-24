@@ -9,6 +9,8 @@ namespace FilmPool.Repositories
         Task<Collections> Get(int Id);
         Task<bool> Create(CollectionRequestModel collection);
         Task<IEnumerable<CollectionsResponseModel>> GetCollections(int userId);
-        Task<bool> AddToCollection(FilmsInCollections filmsAdd);
+        Task<bool> AddToCollection(FilmsInCollectionsRequest filmsAdd);
+        Task<Collections> Delete(int Id);
+
     }
 }

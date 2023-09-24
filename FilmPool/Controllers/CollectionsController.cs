@@ -33,10 +33,18 @@ namespace FilmPool.Controllers
         }
 
         [HttpPost("addFilm")]
-        public async Task<IActionResult> AddToCollection([FromBody] FilmsInCollections filmsAdd)
+        public async Task<IActionResult> AddToCollection([FromBody] FilmsInCollectionsRequest filmsAdd)
         {
             var res = await _collectionsService.AddToCollection(filmsAdd);
             return Ok();
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> RemoveCollection(int id)
+        {
+            var res = await _collectionsService.Delete(id);
+            return Ok(res);
         }
     }
 }

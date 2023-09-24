@@ -52,11 +52,30 @@ namespace FilmPool.Repositories
             return result;
         }
 
-        public async Task<bool> AddToCollection(FilmsInCollections filmsAdd)
+        public async Task<bool> AddToCollection(FilmsInCollectionsRequest filmsAdd)
         {
-            Context.FilmsInCollections.Add(filmsAdd);
+            Context.FilmsInCollections.Add(new FilmsInCollections
+            {
+                FilmId = filmsAdd.FilmId,
+                CollectionId = filmsAdd.CollectionId,
+                AddedDate = filmsAdd.AddedDate,
+            });
             await Context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<Collections> Delete(int Id)
+        {
+            Collections collection = await Get(Id);
+
+            if (collection != null)
+            {
+                Context.Collections.Remove(collection);
+                await Context.SaveChangesAsync();
+            }
+
+            return collection;
+        }
+
     }
 }
