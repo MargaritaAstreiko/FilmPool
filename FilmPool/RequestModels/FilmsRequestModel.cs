@@ -8,6 +8,6 @@ namespace FilmPool.RequestModels
         public int pageSize { get; set; }
         public string? search { get; set; }
         public Genre? genre { get; set; }
-        public bool? sortByRating { get; set; }
+        public bool? rating { get; set; }
     }
 }

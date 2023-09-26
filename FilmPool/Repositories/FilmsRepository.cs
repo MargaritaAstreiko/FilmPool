@@ -20,7 +20,7 @@ namespace FilmPool.Repositories
             Context = context;
         }
 
-        public async Task<FilmsResponseModel> Get(int pageSize, int currentPage, string search, int genre)
+        public async Task<FilmsResponseModel> Get(int pageSize, int currentPage, string search, int genre, bool ratingSort)
         {
 
             var films = Context.Films.Where(x => genre != -1 ? x.Title.Contains(search) && x.Genre.Equals((GenreEnum)genre) : x.Title.Contains(search)).Skip((currentPage - 1) * pageSize).Take(pageSize);

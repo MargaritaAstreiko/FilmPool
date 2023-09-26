@@ -28,6 +28,7 @@ export class FilmsListComponent implements OnInit {
     searchText = '';
     getScreenHeight!: number
     max = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    rating = false;
     genre: Genre | undefined;
     @ViewChild('filmFilter') child: FilmFilterComponent | undefined;
     @ViewChild('filmHeasers') secchild: HeaderComponent | undefined;
@@ -64,7 +65,7 @@ export class FilmsListComponent implements OnInit {
             this.pageSize = 2
         }
 
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe(data => {
+        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre, this.rating).subscribe(data => {
             this.films = data.films.map(i => {
                 i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
                 return i
@@ -82,7 +83,7 @@ export class FilmsListComponent implements OnInit {
     pageChanged(event: any) {
         this.config.currentPage = event;
         this.currentPage = event;
-        this._filmsService.getFilms(this.pageSize, event, this.searchText, this.genre).subscribe(data => {
+        this._filmsService.getFilms(this.pageSize, event, this.searchText, this.genre, this.rating).subscribe(data => {
             this.films = data.films.map(i => {
                 i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
                 return i
@@ -93,7 +94,7 @@ export class FilmsListComponent implements OnInit {
     }
 
     onValueChanged(event: any) {
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe(data => {
+        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre, this.rating).subscribe(data => {
             this.films = data.films.map(i => {
                 i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
                 return i
@@ -111,7 +112,7 @@ export class FilmsListComponent implements OnInit {
 
     filterGenre = (event: any) => {
         this.genre = event;
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe(data => {
+        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre, this.rating).subscribe(data => {
             this.films = data.films.map(i => {
                 i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
                 return i
@@ -132,7 +133,7 @@ export class FilmsListComponent implements OnInit {
         }
         this._ratingService.putRating(rating).subscribe();
 
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre).subscribe(data => {
+        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre, this.rating).subscribe(data => {
             this.films = data.films.map(i => {
                 i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
                 return i
@@ -143,5 +144,16 @@ export class FilmsListComponent implements OnInit {
 
     genreConvention = (genre: string) => {
         return Number(genre) in Genre ? Genre[Number(genre)] : undefined;
+    }
+
+    ratingSort=()=>{
+        this.rating=!this.rating;
+        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre, this.rating).subscribe(data => {
+            this.films = data.films.map(i => {
+                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
+                return i
+
+            });
+        })
     }
 }

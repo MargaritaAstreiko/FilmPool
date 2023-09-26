@@ -7,6 +7,7 @@
         <input type="search" class="nosubmit" id="search-text" aria-describedby="search-text" [(ngModel)]="searchText"
           placeholder="Поиск..." (ngModelChange)="onValueChanged($event)" autofocus>
       </label>
+      <div class="rating">Рейтинг<i-bs class="yellow" (click)="ratingSort()" name="arrow-up"></i-bs><i-bs name="arrow-down"></i-bs></div>
     </div>
     <table class="table">
       <tbody>

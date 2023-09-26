@@ -18,9 +18,9 @@ namespace FilmPool.Services
             _ratingRepository = ratingRepository;
         }
 
-        public async Task<FilmsResponseModel> Get(int pageSize, int currentPage, string search, int genre)
+        public async Task<FilmsResponseModel> Get(int pageSize, int currentPage, string search, int genre , bool rating)
         {
-            return await _filmsRepository.Get(pageSize, currentPage, search, genre);
+            return await _filmsRepository.Get(pageSize, currentPage, search, genre, rating);
         }
 
         public async Task<Film> Get(int id)

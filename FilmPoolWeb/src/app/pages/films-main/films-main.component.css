@@ -155,7 +155,7 @@ table{
 input.nosubmit {
   border: 1px solid white;
   border-radius: 1%;
-  width: 50%;
+  width: 90%;
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: white;
@@ -173,4 +173,21 @@ input.nosubmit {
 
 table{
   margin-bottom: 40px;
+}
+
+label {
+  flex-grow: 1;
+} 
+.rating{
+  flex-grow: 1.5;
+  color: white;
+}
+.searchform{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.yellow{
+  color: orange;
 }

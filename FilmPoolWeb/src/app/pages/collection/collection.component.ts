@@ -18,7 +18,7 @@ export class CollectionComponent implements OnInit {
   addNewCollection = false;
   collections!: Collection[];
   filmSelected!: FilmLightModel;
-  activeCollection!: number;
+  activeCollection!: number|null;
   userId = localStorage.getItem("userId") || 0;
 
   constructor(
@@ -54,7 +54,7 @@ export class CollectionComponent implements OnInit {
   }
 
   activateCollection = (id: number) => {
-    this.activeCollection = id;
+    this.activeCollection = this.activeCollection === id? null:  this.activeCollection = id;
 
   }
   newCollection = () => {

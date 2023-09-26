@@ -29,7 +29,7 @@ namespace FilmPool.Controllers
         {
             string search = filmsRequestModel.search ?? string.Empty;
             int genre = filmsRequestModel.genre?.GenreName.Length > 0 ? (int)filmsRequestModel.genre.Id : -1;
-            var films = await _filmsService.Get(filmsRequestModel.pageSize, filmsRequestModel.currentPage, search, genre);
+            var films = await _filmsService.Get(filmsRequestModel.pageSize, filmsRequestModel.currentPage, search, genre, (bool)filmsRequestModel.rating);
 
             return Ok(films);
         }

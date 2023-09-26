@@ -19,9 +19,9 @@ export class FilmsService {
     )
 
 
-  getFilms(pageSize: number, currentPage: number, search: string, genre?: Genre): Observable<FilmResponseModel> {
+  getFilms(pageSize: number, currentPage: number, search: string, genre?: Genre, rating?: boolean) : Observable<FilmResponseModel> {
     return this.http
-      .post<FilmResponseModel>(`${this.apiURL}/films`,{pageSize:pageSize,currentPage:currentPage, search:search, genre:genre})
+      .post<FilmResponseModel>(`${this.apiURL}/films`,{pageSize:pageSize,currentPage:currentPage, search:search, genre:genre, rating:rating})
   }
 
   getFilm(id: number): Observable<FilmInfo>{
