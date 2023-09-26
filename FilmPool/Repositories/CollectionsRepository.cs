@@ -33,20 +33,19 @@ namespace FilmPool.Repositories
         public async Task<IEnumerable<CollectionsResponseModel>> GetCollections(int userId)
         {
             var collections =  Context.Collections.Where(x => (x.UserId == userId && x.IsPublic == false) || x.IsPublic == true);
-            var fimsInCollections =  Context.FilmsInCollections;
+            var filmsInCollections =  Context.FilmsInCollections;
             var filmIds = await Context.FilmsInCollections.Select(x=>x.FilmId).ToListAsync();
             var films = Context.Films.Where(x => filmIds.Contains(x.Id)).Select(x => new FilmShortModel { Id = x.Id, Title = x.Title });
             var res = from s in collections
-                      join g in fimsInCollections on s.Id equals g.CollectionId into h
-                      from i in h.DefaultIfEmpty()
                       select new CollectionsResponseModel
                       {
                           Id = s.Id,
                           CollectionName = s.CollectionName,
-                          filmNames = (from f in films
-                                       where f.Id == i.FilmId
-                                       select f.Title).ToList(),
-
+                          FilmNames = (from i in filmsInCollections
+                                     join t in films on i.FilmId equals t.Id 
+                                     where i.CollectionId==s.Id
+                                     select t.Title).ToList(),
+                         
                       };
             var result = await res.ToListAsync();
             return result;
