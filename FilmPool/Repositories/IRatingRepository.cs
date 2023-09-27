@@ -4,11 +4,12 @@ using FilmPool.ResponseModels;
 
 namespace FilmPool.Repositories
 {
-  public interface IRatingRepository
-  {
-    Task<Rating> Get(RatingRequestModel rating);
-    Task<bool> Create(RatingRequestModel rating);
-    Task<bool> Update(RatingRequestModel rating);
-    Task<double> GetFilmRating(int filmId);
-  }
+    public interface IRatingRepository
+    {
+        Task<Rating> Get(RatingRequestModel rating);
+        Task<bool> Create(RatingRequestModel rating);
+        Task<bool> Update(RatingRequestModel rating);
+        Task<double> GetFilmRating(int filmId);
+        Task<bool> UpdateFilmRating(int filmId);
+    }
 }

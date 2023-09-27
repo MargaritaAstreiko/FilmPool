@@ -23,7 +23,8 @@ namespace FilmPool.Repositories
         public async Task<FilmsResponseModel> Get(int pageSize, int currentPage, string search, int genre, bool ratingSort)
         {
 
-            var films = Context.Films.Where(x => genre != -1 ? x.Title.Contains(search) && x.Genre.Equals((GenreEnum)genre) : x.Title.Contains(search)).Skip((currentPage - 1) * pageSize).Take(pageSize);
+            var films =  ratingSort? Context.Films.Where(x => genre != -1 ? x.Title.Contains(search) && x.Genre.Equals((GenreEnum)genre) : x.Title.Contains(search)).OrderByDescending(x=>x.TotalRating).Skip((currentPage - 1) * pageSize).Take(pageSize)
+                : Context.Films.Where(x => genre != -1 ? x.Title.Contains(search) && x.Genre.Equals((GenreEnum)genre) : x.Title.Contains(search)).Skip((currentPage - 1) * pageSize).Take(pageSize);
             List<int> ids = await films.Select(x => x.Id).ToListAsync();
             var rating = Context.Rating.Where(x => ids.Contains(x.FilmId));
             var ratingCommon = from g in rating
@@ -44,7 +45,7 @@ namespace FilmPool.Repositories
                 Year = f.Year,
                 Description = f.Description,
                 Picture = f.Picture != null && f.Picture.Length > 0 ? Convert.ToBase64String(f.Picture) : null,
-                Rating = g.Rating
+                Rating = g.Rating!=null ? g.Rating : 0,
             };
             var all = await result.ToListAsync();
             int totalFilms = await Context.Films.Where(x => genre != -1 ? x.Title.Contains(search) && x.Genre.Equals((GenreEnum)genre) : x.Title.Contains(search)).CountAsync();

@@ -10,6 +10,7 @@ namespace FilmPool.DbModels
         public string Duration { get; set; }
         public string? Description { get; set; }
         public byte[]? Picture { get; set; }
+        public double? TotalRating { get; set; }
         public string? FilmUrl { get; set; }
         public ICollection<Rating> Ratings { get; set; }
         public ICollection<Comments> Comments { get; set; }
