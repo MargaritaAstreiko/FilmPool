@@ -1,3 +1,4 @@
+using FileStorage.FileStorage;
 using FilmPool.DbModels;
 using FilmPool.ResponseModels;
 using FilmPool.Services;
@@ -32,6 +33,16 @@ namespace FilmPool.Controllers
             return Ok(user);
         }
 
+        [HttpPost("Picture")]
+        public async Task<IActionResult> PostPicture(IFormFile file)
+        {
+            await using var memoryStream = new MemoryStream();
+            await file.CopyToAsync(memoryStream);
+            var bytes = memoryStream.ToArray();
+            var picture = new Picture();
+            var res = picture.UploadImage(bytes, 1, "dbo.Users");
+            return Ok(res);
+        }
 
     }
 }

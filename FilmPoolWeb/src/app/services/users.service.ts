@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -20,4 +20,10 @@ export class UsersService {
       .get<User[]>(`${this.apiURL}/users`)
   }
 
+  picture(id: number, file: FormData):Observable<boolean>{
+    return this.http
+    .post<boolean>(`${this.apiURL}/films/Picture/${id}`,file).pipe(
+      tap(data => data)
+    );
+  }
 }

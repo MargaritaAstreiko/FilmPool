@@ -37,9 +37,8 @@ export class FilmsService {
   }
 
   picture(id: number, file: FormData):Observable<boolean>{
-    console.log(file)
     return this.http
-    .post<boolean>(`${this.apiURL}/films/Picture`,file).pipe(
+    .post<boolean>(`${this.apiURL}/films/Picture/${id}`,file).pipe(
       tap(data => data)
     );
   }

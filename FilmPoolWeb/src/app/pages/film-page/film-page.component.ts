@@ -36,9 +36,10 @@ export class FilmComponent implements OnInit {
     comment!: Comment;
     collections!: Collection[];
     collection!: Collection;
-    addToCollection=false;
+    addToCollection = false;
+    collectionId!: number;
     @ViewChild('filmComments') child: FilmCommentsComponent | undefined;
-    @ViewChild('filmVideoPlayer') thchild: VideoPlayerComponent| undefined;
+    @ViewChild('filmVideoPlayer') thchild: VideoPlayerComponent | undefined;
     @ViewChild('filmHeaders') secchild: HeaderComponent | undefined;
     userId = localStorage.getItem("userId") || 0;
 
@@ -60,10 +61,10 @@ export class FilmComponent implements OnInit {
             duration: new FormControl(''),
 
         })
-        this._collectionsService.getCollection(+this.userId).subscribe(data =>{
-            this.collections=data;
-            this.collection=this.collections[0];
-          });
+        this._collectionsService.getCollection(+this.userId).subscribe(data => {
+            this.collections = data;
+            this.collection = this.collections[0];
+        });
         this.route.params.subscribe(params => {
             const id = params['id'];
             if (id) {
@@ -102,15 +103,15 @@ export class FilmComponent implements OnInit {
     addComment = (event: any) => {
         this.comment = event;
     }
-    addFilmToCollection=()=>{
-        this.addToCollection=!this.addToCollection;
+    addFilmToCollection = () => {
+        this.addToCollection = !this.addToCollection;
     }
     genreConvention = (genre: string) => {
         return Number(genre) in Genre ? Genre[Number(genre)] : undefined;
     }
 
     updateFilm = (filmValue: any) => {
-        this.enableEditMode(); 
+        this.enableEditMode();
         const filmInfo = { ...filmValue };
 
         const filmUpdateInfo: Film = {
@@ -119,7 +120,7 @@ export class FilmComponent implements OnInit {
             year: filmInfo.year,
             description: this.film.description,
             duration: filmInfo.duration,
-            genre: filmInfo.genre,
+            genre: this.film.genre,
             rating: 0,
             picture: ''
         }
@@ -143,12 +144,16 @@ export class FilmComponent implements OnInit {
 
     }
 
+    filterChanged = (e: any) => {
+        this.collectionId=e.target.value;
+    }
+
     saveToCollection = () => {
-        const FilmToCollection: FilmToCollection={
-          collectionId: this.collection.id,
-          filmId:this.film.id,
-          addededDate: new Date()
+        const FilmToCollection: FilmToCollection = {
+            collectionId:  this.collectionId,
+            filmId: this.film.id,
+            addededDate: new Date()
         }
         this._collectionsService.addToCollection(FilmToCollection).subscribe();
-      }
+    }
 }

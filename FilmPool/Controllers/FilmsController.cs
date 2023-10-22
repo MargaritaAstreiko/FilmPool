@@ -34,14 +34,14 @@ namespace FilmPool.Controllers
             return Ok(films);
         }
 
-        [HttpPost("Picture")]
-        public async Task<IActionResult> PostPicture(IFormFile file)
+        [HttpPost("Picture/{id}")]
+        public async Task<IActionResult> PostPicture( int id, IFormFile file)
         {
             await using var memoryStream = new MemoryStream();
             await file.CopyToAsync(memoryStream);
             var bytes = memoryStream.ToArray();
             var picture = new Picture();
-            var res = picture.UploadImage(bytes, 1);
+            var res = picture.UploadImage(bytes, id,"dbo.Films");
             return Ok(res);
         }
 

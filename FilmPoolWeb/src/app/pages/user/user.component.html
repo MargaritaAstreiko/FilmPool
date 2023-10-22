@@ -1,1 +1,44 @@
-<p>user works!</p>
+<app-filmHeaders class='app-headers' #filmHeaders></app-filmHeaders>
+<div *ngIf="!editMode" class="user-info-full">
+    <div class="ava">
+    <img [src]="url" height="200" width="240" *ngIf="url">
+    </div>
+    <div class="info"><div class="userinfo">Имя: {{user.firstName}}</div>
+    <div class="userinfo">Фамилия: {{user.lastName}}</div>
+    <div class="userinfo">Логин: {{user.userName}}</div>
+    <div class="userinfo">Email: {{user.email}}</div>
+</div>
+</div>
+
+<div *ngIf="editMode" class="card">
+    <div class="card-body">
+        <form [formGroup]="usercontent" id="usercontent" (ngSubmit)="updateUser(usercontent.value)">
+            <button type="submit"></button>
+            <label for="firstName">Имя:</label>
+            <div>
+                <input type="text" id="firstName" formControlName="firstName" class="form-control"
+                    [(ngModel)]="user.firstName" />
+            </div>
+            <label for="lattName">Фамилия:</label>
+            <div>
+                <input type="text" id="lastName" formControlName="lastName" class="form-control"
+                    [(ngModel)]="user.lastName" />
+            </div>
+            <label for="userName">Логин:</label>
+            <div>
+                <input type="text" id="userName" formControlName="userName" class="form-control"
+                    [(ngModel)]="user.userName" />
+            </div>
+            <label for="fileInput">Избражение:</label>
+            <img [src]="url" height="200" *ngIf="url">
+            <div>
+                <input #fileInput id="fileInput" type='file' value="" (change)="onSelectFile($event)"
+                    accept=".jpg, .jpeg, .png">
+            </div>
+            <label for="email">Email:</label>
+            <div>
+                <input type="text" id="email" formControlName="email" class="form-control" [(ngModel)]="user.email">
+            </div>
+        </form>
+    </div>
+</div>

@@ -17,6 +17,7 @@ namespace FilmPool.Data.Schemas
       builder.Property(t => t.UserName).HasColumnName("UserName").HasMaxLength(50);
       builder.Property(t => t.Email).HasColumnName("Email").HasMaxLength(60);
       builder.Property(t => t.Password).HasColumnName("Password");
+      builder.Property(t => t.Picture).HasColumnName("Picture");
       builder.HasOne(x => x.Role)
         .WithMany()
         .HasForeignKey(x => x.UserRole)

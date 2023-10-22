@@ -5,7 +5,6 @@ import { appRoutingModule } from './app-routing';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FilmsListComponent } from './pages/films-main/films-main.component';
-import { UserComponent } from './pages/user/user.component';
 import { UserlistComponent } from './pages/userlist/userlist.component';
 import { FilmFilterComponent } from './pages/film/filmFilter.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -28,6 +27,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { CollectionComponent } from './pages/collection/collection.component';
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import { VideoPlayerComponent } from './shared/video-player/video-player.component';
+import { UserComponent } from './pages/user/user.component';
 
 
 export function tokenGetter() {
@@ -50,6 +50,7 @@ export function tokenGetter() {
     FilmComponent,
     CollectionComponent,
     VideoPlayerComponent,
+    UserComponent,
     
   ],
   imports: [

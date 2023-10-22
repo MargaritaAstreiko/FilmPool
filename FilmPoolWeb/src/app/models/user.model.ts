@@ -9,4 +9,6 @@ export class User {
     password!: string;
     userRole!: Role;
     role!: any| null;
+    picture!: string;
+
 }

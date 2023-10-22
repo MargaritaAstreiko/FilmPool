@@ -11,7 +11,6 @@
 }
 
 .film-container {
-    margin-left: 20%;
     color: white;
     display: flex;
     flex-direction: column;
@@ -23,6 +22,11 @@
     margin-bottom: 10px;
     font-size: 13px;
 }
+
+.film-info-full {
+    width: 80%;
+}
+
 
 input {
     margin-bottom: 20px;
@@ -38,6 +42,7 @@ input {
     padding: 20px;
     border: 1px solid white;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .card-body {
@@ -78,14 +83,14 @@ form button {
     margin-bottom: 20px;
 }
 
- .film {
-   height: 93.5vh;
+.film {
+    height: 93.5vh;
     overflow-y: scroll;
-     z-index:1;
+    z-index: 1;
     scrollbar-color: #999 #333;
 }
 
- .film::-webkit-scrollbar {
+.film::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
@@ -96,4 +101,12 @@ form button {
 
 .film::-webkit-scrollbar-track {
     background: #333;
+}
+
+.coll-info {
+    display: flex;
+}
+
+.add-to-collection{
+    width:20%;
 }

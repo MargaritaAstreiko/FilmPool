@@ -5,32 +5,33 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
-  selector: 'app-filmHeaders',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+    selector: 'app-filmHeaders',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit  {
-    user!:User
-
+export class HeaderComponent implements OnInit {
+    user!: User;
+    userId!: number;
     constructor(
         private _authService: AuthenticationService,
-        private router: Router, 
+        private router: Router,
 
-    ) {}
+    ) { }
 
     ngOnInit() {
-        const id = localStorage.getItem("userId")||0;
-        this._authService.getUserInfo(+id).subscribe(data=>{
-        this.user=data;
+        const id = localStorage.getItem("userId") || 0;
+        this.userId = +id;
+        this._authService.getUserInfo(+id).subscribe(data => {
+            this.user = data;
         });
-    
+
     }
 
-    logout=()=>{
+    logout = () => {
         this._authService.logoutUser();
-        this.router.navigate(['/login']); 
+        this.router.navigate(['/login']);
     }
-  
+
 
 }
 

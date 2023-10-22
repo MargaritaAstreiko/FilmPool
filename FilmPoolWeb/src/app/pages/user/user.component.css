@@ -1,0 +1,56 @@
+
+input {
+    margin-bottom: 20px;
+}
+
+.card {
+    margin-left: 20%;
+}
+
+.card-body {
+    margin-top: 20px;
+}
+
+label {
+    color: white;
+}
+
+input {
+    border-radius: 0.25rem;
+}
+
+input:focus {
+    border: 1px solid rgb(221, 150, 19);
+}
+
+form button {
+    background-color: #ec4197;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 14px 20px;
+    border-radius: 3px;
+    line-height: 0.3;
+    background: rgb(56, 56, 52);
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    position: relative;
+    transition: background-color .6s ease;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.user-info-full{
+    display: flex;
+    color: white;
+    margin-top: 25px;
+}
+
+.ava{
+    margin: 25px;
+}
+
