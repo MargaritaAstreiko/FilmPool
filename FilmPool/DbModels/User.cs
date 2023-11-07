@@ -13,6 +13,7 @@ namespace FilmPool.DbModels
         public string Email { get; set; }
         public string Password { get; set; }
         public byte[]? Picture { get; set; }
+        public Boolean IsBlocked { get; set; }
         public RoleEnum UserRole { get; set; }
         public Role Role { get; set; }
         public ICollection<Rating> Ratings { get; set; }

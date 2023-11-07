@@ -38,7 +38,7 @@
     display: flex;
     flex-direction: column;
     padding: 10px 30px;
-    background: linear-gradient(to left, #f08fc0 0%, white, #f08fc0 );
+    background: linear-gradient(to left, #f08fc0 0%, white, #f08fc0);
     border-bottom: 1px solid grey;
     color: white;
     font-size: 20px;
@@ -52,7 +52,30 @@ i-bs:last-of-type {
 }
 
 
-.coll-items{
+.coll-items {
     display: flex;
 
 }
+
+.form-group {
+    display: flex;
+    background-color: rgb(56, 56, 52);
+    margin-top: 20px;
+    border: 2px white solid;
+    border-radius:5px;
+}
+
+.form-item {
+    padding:25px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+
+button {
+    font-size: 1.2em;
+    margin: 5px;
+    border-radius:5px;
+  }

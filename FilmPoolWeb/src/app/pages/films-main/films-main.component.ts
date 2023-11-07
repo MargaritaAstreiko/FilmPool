@@ -29,6 +29,7 @@ export class FilmsListComponent implements OnInit {
     getScreenHeight!: number
     max = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     rating = false;
+    year!: number;
     genre: Genre | undefined;
     @ViewChild('filmFilter') child: FilmFilterComponent | undefined;
     @ViewChild('filmHeasers') secchild: HeaderComponent | undefined;
@@ -54,6 +55,21 @@ export class FilmsListComponent implements OnInit {
         this.determinePageSize(this.getScreenHeight);
     }
 
+    getFilms() {
+        this._filmsService.getFilms(this.pageSize, this.currentPage, this.year, this.searchText, this.genre, this.rating).subscribe(data => {
+            this.films = data.films.map(i => {
+                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
+                return i
+            });
+            this.config = {
+                id: 'basicPaginate',
+                itemsPerPage: this.pageSize,
+                currentPage: this.currentPage ? this.currentPage : 1,
+                totalItems: data.totalFilms
+            }
+        })
+    }
+
     determinePageSize(size: number) {
         if (size > 1100 && size <= 1400) {
             this.pageSize = 4
@@ -65,61 +81,32 @@ export class FilmsListComponent implements OnInit {
             this.pageSize = 2
         }
 
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre, this.rating).subscribe(data => {
-            this.films = data.films.map(i => {
-                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
-                return i
-
-            });
-            this.config = {
-                id: 'basicPaginate',
-                itemsPerPage: this.pageSize,
-                currentPage: this.currentPage ? this.currentPage : 1,
-                totalItems: data.totalFilms
-            }
-        });
+        this.getFilms();
     }
 
     pageChanged(event: any) {
         this.config.currentPage = event;
         this.currentPage = event;
-        this._filmsService.getFilms(this.pageSize, event, this.searchText, this.genre, this.rating).subscribe(data => {
-            this.films = data.films.map(i => {
-                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
-                return i
-
-            });
-            this.config.totalItems = data.totalFilms;
-        })
+        this.getFilms();
     }
 
     onValueChanged(event: any) {
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre, this.rating).subscribe(data => {
-            this.films = data.films.map(i => {
-                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
-                return i
-
-            });
-            this.config.totalItems = data.totalFilms;
-        })
+        this.getFilms();
     }
 
     toFilm(id: number) {
         this.router.navigate(['film', id], {
-            // queryParams: { id: id }
         });
     }
 
     filterGenre = (event: any) => {
         this.genre = event;
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre, this.rating).subscribe(data => {
-            this.films = data.films.map(i => {
-                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
-                return i
+        this.getFilms();
+    }
 
-            });
-            this.config.totalItems = data.totalFilms;
-        })
+    filterYear = (event: any) => {
+        this.year = event;
+        this.getFilms();
     }
 
     toggleRating = (i: number, filmId: number) => {
@@ -133,27 +120,15 @@ export class FilmsListComponent implements OnInit {
         }
         this._ratingService.putRating(rating).subscribe();
 
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre, this.rating).subscribe(data => {
-            this.films = data.films.map(i => {
-                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
-                return i
-
-            });
-        })
+        this.getFilms();
     }
 
     genreConvention = (genre: string) => {
         return Number(genre) in Genre ? Genre[Number(genre)] : undefined;
     }
 
-    ratingSort=()=>{
-        this.rating=!this.rating;
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.searchText, this.genre, this.rating).subscribe(data => {
-            this.films = data.films.map(i => {
-                i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
-                return i
-
-            });
-        })
+    ratingSort = () => {
+        this.rating = !this.rating;
+        this.getFilms();
     }
 }

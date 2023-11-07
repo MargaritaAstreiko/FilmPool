@@ -1,6 +1,7 @@
 using FilmPool.Data;
 using FilmPool.DbModels;
 using FilmPool.Repositories;
+using FilmPool.RequestModels;
 
 namespace FilmPool.Services
 {
@@ -33,7 +34,7 @@ namespace FilmPool.Services
     {
       return await _userRepository.Get(id);
     }
-    public async Task<bool> Update(User user)
+    public async Task<bool> Update(UserUpdateRequestModel user)
     {
       return await _userRepository.Update(user);
     }

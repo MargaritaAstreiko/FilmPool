@@ -10,6 +10,7 @@
           <th>Фамилия</th>
           <th>Логин</th>
           <th>Email</th>
+          <th>Заблокировать</th>
         </tr>
         <tr *ngFor="let user of users">
           <td>
@@ -23,6 +24,9 @@
           </td>
           <td>
             <div> {{user.email}}</div>
+          </td>
+          <td>
+            <div><input type="checkbox"></div>
           </td>
         </tr>
       </tbody>

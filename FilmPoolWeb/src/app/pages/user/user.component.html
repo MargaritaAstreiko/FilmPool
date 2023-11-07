@@ -1,44 +1,42 @@
 <app-filmHeaders class='app-headers' #filmHeaders></app-filmHeaders>
-<div *ngIf="!editMode" class="user-info-full">
-    <div class="ava">
-    <img [src]="url" height="200" width="240" *ngIf="url">
-    </div>
-    <div class="info"><div class="userinfo">Имя: {{user.firstName}}</div>
-    <div class="userinfo">Фамилия: {{user.lastName}}</div>
-    <div class="userinfo">Логин: {{user.userName}}</div>
-    <div class="userinfo">Email: {{user.email}}</div>
-</div>
-</div>
-
-<div *ngIf="editMode" class="card">
+<div class="card">
     <div class="card-body">
         <form [formGroup]="usercontent" id="usercontent" (ngSubmit)="updateUser(usercontent.value)">
-            <button type="submit"></button>
+            <div class="form-half">
+            <img [src]="url" height="200" *ngIf="url">
+            <div *ngIf="editMode">
+                <input #fileInput id="fileInput" type='file' value="" (change)="onSelectFile($event)"
+                    accept=".jpg, .jpeg, .png" [readonly]="editMode? false: true">
+            </div>
+            </div>
+            <div class="form-half"> 
             <label for="firstName">Имя:</label>
             <div>
                 <input type="text" id="firstName" formControlName="firstName" class="form-control"
-                    [(ngModel)]="user.firstName" />
+                    [(ngModel)]="user.firstName" [readonly]="editMode? false: true" />
             </div>
             <label for="lattName">Фамилия:</label>
             <div>
                 <input type="text" id="lastName" formControlName="lastName" class="form-control"
-                    [(ngModel)]="user.lastName" />
+                    [(ngModel)]="user.lastName" [readonly]="editMode? false: true" />
             </div>
             <label for="userName">Логин:</label>
             <div>
                 <input type="text" id="userName" formControlName="userName" class="form-control"
-                    [(ngModel)]="user.userName" />
-            </div>
-            <label for="fileInput">Избражение:</label>
-            <img [src]="url" height="200" *ngIf="url">
-            <div>
-                <input #fileInput id="fileInput" type='file' value="" (change)="onSelectFile($event)"
-                    accept=".jpg, .jpeg, .png">
+                    [(ngModel)]="user.userName" [readonly]="editMode? false: true" />
             </div>
             <label for="email">Email:</label>
             <div>
-                <input type="text" id="email" formControlName="email" class="form-control" [(ngModel)]="user.email">
+                <input type="text" id="email" formControlName="email" class="form-control" [(ngModel)]="user.email"
+                    [readonly]="editMode? false: true">
+            </div>
+            <button *ngIf="editMode" type="submit" class="btn">Сохранить</button>
             </div>
         </form>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange" class="bi bi-pencil-fill"
+        (click)="enableEditMode()" viewBox="0 0 16 16">
+        <path
+            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+    </svg>
     </div>
 </div>

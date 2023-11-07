@@ -1,6 +1,6 @@
 <app-filmHeaders class='app-headers' #filmHeaders></app-filmHeaders>
 <div class="films-container">
-  <app-filmFilter class='app-filters' #filmFilter (genre)="filterGenre($event)"></app-filmFilter>
+  <app-filmFilter class='app-filters' #filmFilter (genre)="filterGenre($event)" (year)="filterYear($event)"></app-filmFilter>
   <div class="films-content">
     <div class="searchform">
       <label>

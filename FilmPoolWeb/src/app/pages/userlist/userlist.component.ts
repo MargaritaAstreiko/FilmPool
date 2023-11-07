@@ -11,6 +11,7 @@ import { HeaderComponent } from '../../shared/header/header.component';
 
 export class UserlistComponent implements OnInit {
   users!: User[];
+  editMode: boolean | undefined;
 
   @ViewChild('filmHeaders') secchild: HeaderComponent | undefined;
   constructor(
@@ -23,4 +24,9 @@ export class UserlistComponent implements OnInit {
       this.users=data;
      });
   }
+
+  enableEditMode() {
+    this.editMode = !this.editMode;
+}
+
 }

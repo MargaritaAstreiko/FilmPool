@@ -3,12 +3,14 @@ input {
     margin-bottom: 20px;
 }
 
-.card {
-    margin-left: 20%;
+form {
+   display: flex;
 }
 
 .card-body {
     margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 label {
@@ -21,11 +23,6 @@ input {
 
 input:focus {
     border: 1px solid rgb(221, 150, 19);
-}
-
-form button {
-    background-color: #ec4197;
-    margin-top: 10px;
 }
 
 .btn {
@@ -52,5 +49,19 @@ form button {
 
 .ava{
     margin: 25px;
+}
+
+.userinfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-half{
+    margin-left: 20%;
+}
+
+img {
+    width: 250px;
+    height: 190px;
 }
 

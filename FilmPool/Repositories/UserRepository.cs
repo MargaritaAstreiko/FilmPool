@@ -1,5 +1,6 @@
 using FilmPool.Data;
 using FilmPool.DbModels;
+using FilmPool.RequestModels;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
@@ -68,15 +69,15 @@ namespace FilmPool.Repositories
       await Context.SaveChangesAsync();
       return true;
     }
-    public async Task <bool> Update(User user)
+    public async Task <bool> Update(UserUpdateRequestModel user)
     {
       User currentUser = await Get(user.Id);
       currentUser.FirstName= user.FirstName;
       currentUser.LastName= user.LastName;
       currentUser.UserName = user.UserName;
       currentUser.Email= user.Email;
-      currentUser.Password= user.Password;
-      currentUser.UserRole = user.UserRole;
+      //currentUser.Password= user.Password;
+      //currentUser.UserRole = user.UserRole;
 
       Context.Users.Update(currentUser);
       await Context.SaveChangesAsync();

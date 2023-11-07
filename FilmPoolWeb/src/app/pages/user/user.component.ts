@@ -90,7 +90,7 @@ export class UserComponent implements OnInit {
       this._usersService.picture(+this.userId, form)
         .subscribe()
     }
-    // this._filmsService.updateFilm(filmUpdateInfo).subscribe()
+     this._usersService.updateUser(userUpdateInfo).subscribe()
 
   }
 }

@@ -26,4 +26,10 @@ export class UsersService {
       tap(data => data)
     );
   }
+
+  updateUser(user: User): Observable<boolean>{
+    return this.http
+    .post<boolean>(`${this.apiURL}/users/${user.id}`,{...user})
+
+  }
 }

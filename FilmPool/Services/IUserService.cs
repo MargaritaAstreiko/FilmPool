@@ -1,4 +1,5 @@
 using FilmPool.DbModels;
+using FilmPool.RequestModels;
 
 namespace FilmPool.Services
 {
@@ -8,7 +9,7 @@ namespace FilmPool.Services
     Task<User> Get(int id);
     Task<User> AuthenticateUser(string userName, string password);
     Task<bool> Create(User user);
-    Task<bool> Update(User user);
+    Task<bool> Update(UserUpdateRequestModel user);
     Task<User> Delete(int id);
     Task<User> FindUserByEmail(string email);
     string GenerateToken(User user, long ticks);

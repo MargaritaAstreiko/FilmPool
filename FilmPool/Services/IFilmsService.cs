@@ -6,7 +6,7 @@ namespace FilmPool.Services
 {
     public interface IFilmsService
     {
-        Task<FilmsResponseModel> Get(int pageSize, int currentPage, string search, int genre , bool rating);
+        Task<FilmsResponseModel> Get(int pageSize, int currentPage, int year, string search, int genre , bool rating);
         Task<Film> Get(int id);
         Task<bool> Create(Film film);
         Task<bool> Update(FilmUpdateRequestModel film);

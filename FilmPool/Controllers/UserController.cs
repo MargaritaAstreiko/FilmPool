@@ -1,5 +1,6 @@
 using FileStorage.FileStorage;
 using FilmPool.DbModels;
+using FilmPool.RequestModels;
 using FilmPool.ResponseModels;
 using FilmPool.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -43,6 +44,15 @@ namespace FilmPool.Controllers
             var res = picture.UploadImage(bytes, 1, "dbo.Users");
             return Ok(res);
         }
+
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserUpdateRequestModel user)
+        {
+            var res = await _userService.Update(user);
+            return Ok(res);
+        }
+
 
     }
 }

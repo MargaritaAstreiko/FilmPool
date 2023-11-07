@@ -1,22 +1,22 @@
 <div class="filters">
-<div class="film-card"><div>Меню</div>
-<div>По жанрам</div>
+  <div class="film-card">
+    <div>Меню</div>
+    <div>По жанрам</div>
     <ul>
-        <li  *ngFor="let genre of genres" (click)="getGenre(genre)" [ngClass]="{'selected': genre.id==genreSelected}">{{genre.genreName}}</li>
+      <li *ngFor="let genre of genres" (click)="getGenre(genre)" [ngClass]="{'selected': genre.id==genreSelected}">
+        {{genre.genreName}}</li>
     </ul>
     <div>По годам</div>
     <ul>
-        <li  *ngFor="let year of years" (click)="getYear(year)" [ngClass]="{'selected': year==yearSelected}">{{year}}</li>
+      <li *ngFor="let year of years" (click)="getYear(year)" [ngClass]="{'selected': year==yearSelected}">{{year}}</li>
     </ul>
-
-
-</div>
-<div>
-  <a [routerLink]="'/collections'">
-    Коллекции
-  </a>
-</div>
-<div *ngIf="isAdmin">
+  </div>
+  <div>
+    <a [routerLink]="'/collections'">
+      Коллекции
+    </a>
+  </div>
+  <div *ngIf="isAdmin">
     <a [routerLink]="'/users'">
       Пользователи
     </a>
