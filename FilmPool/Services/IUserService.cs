@@ -15,5 +15,7 @@ namespace FilmPool.Services
     string GenerateToken(User user, long ticks);
     string GetHashedPassword(string password);
     Task<bool> ResetPasswordAsync(User user, string token, string newPassword);
+    Task<bool> BlockUser(int id);
+
   }
 }

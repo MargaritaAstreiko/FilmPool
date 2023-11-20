@@ -36,6 +36,13 @@ export class FilmsService {
 
   }
 
+  
+  createFilm(film: Film): Observable<number>{
+    return this.http
+    .post<number>(`${this.apiURL}/films/new`,{...film})
+
+  }
+
   picture(id: number, file: FormData):Observable<boolean>{
     return this.http
     .post<boolean>(`${this.apiURL}/films/Picture/${id}`,file).pipe(

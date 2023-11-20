@@ -28,6 +28,7 @@ import { CollectionComponent } from './pages/collection/collection.component';
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import { VideoPlayerComponent } from './shared/video-player/video-player.component';
 import { UserComponent } from './pages/user/user.component';
+import { FilmCreateComponent } from './pages/create-film/create-film.component';
 
 
 export function tokenGetter() {
@@ -51,6 +52,8 @@ export function tokenGetter() {
     CollectionComponent,
     VideoPlayerComponent,
     UserComponent,
+    FilmCreateComponent, 
+
     
   ],
   imports: [

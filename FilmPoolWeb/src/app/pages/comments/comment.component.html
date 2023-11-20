@@ -9,9 +9,27 @@
                         d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z" />
                 </svg></button>
         </form>
-        <textarea id="description" class="text" cols="80" rows ="10" name="description"  [(ngModel)]="commentText" form="newComment"></textarea>
+        <textarea id="description" class="text" cols="80" rows="10" name="description" [(ngModel)]="commentText"
+            form="newComment"></textarea>
     </div>
-    <div *ngFor="let comment of comments" class="comment-row">{{comment.comment}}
-        <div>{{comment.createdDate}}</div>
+    <div *ngFor="let comment of comments" class="comment">
+        <div class="comment-user">
+            <div class="picture"><img src={{comment.picture}} alt="image" width="70px" height="50px"></div>
+            <div>{{comment.userName}}
+            </div>
+        </div>
+        <div *ngIf="!(this.comment.id==commentId)" class="comment-row">
+            <div>{{comment.comment}}</div>
+            <div class="date-btns">
+                <div>{{comment.createdDate}}</div>
+                <div class="comment-icons">
+                    <i-bs *ngIf="comment.userId==userId" (click)="deleteComment(comment.id)" name="trash"></i-bs>
+                    <i-bs *ngIf="comment.userId==userId" (click)="changeComment(comment.id)" name="pencil"></i-bs>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="editComment&&(this.comment.id==commentId)" class="comment-row">
+            <input type="text" class="nosubmit" id="comment-text-updated" [(ngModel)]="comment.comment" autofocus>
+            <i-bs  (click)="updateComment(comment.comment)" name="save"></i-bs>
     </div>
 </div>

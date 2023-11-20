@@ -110,3 +110,13 @@ form button {
 .add-to-collection{
     width:20%;
 }
+
+i-bs{
+    color:rgb(221, 150, 19); 
+    float: right;
+}
+
+.form-btns{
+    width: 25px;
+    height: 25px;
+}

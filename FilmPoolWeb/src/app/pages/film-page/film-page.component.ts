@@ -106,7 +106,7 @@ export class FilmComponent implements OnInit {
     addFilmToCollection = () => {
         this.addToCollection = !this.addToCollection;
     }
-    genreConvention = (genre: string) => {
+    genreConvention = (genre: Genre) => {
         return Number(genre) in Genre ? Genre[Number(genre)] : undefined;
     }
 
@@ -149,6 +149,7 @@ export class FilmComponent implements OnInit {
     }
 
     saveToCollection = () => {
+        this.addToCollection =!this.addToCollection;
         const FilmToCollection: FilmToCollection = {
             collectionId:  this.collectionId,
             filmId: this.film.id,

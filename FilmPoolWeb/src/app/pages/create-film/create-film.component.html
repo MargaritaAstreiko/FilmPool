@@ -1,0 +1,39 @@
+<app-filmHeaders class='app-headers' #filmHeaders></app-filmHeaders>
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="filmcontent" id="filmcontent" (ngSubmit)="createFilm(filmcontent.value)">
+            <i-bs class="form-btns" (click)="createFilm(filmcontent.value)" width="1.2rem" height="1.2rem"
+                name="save"></i-bs>
+            <div>
+                <label for="title">Название:</label>
+                <div>
+                    <input type="text" id="title" formControlName="title" class="form-control" />
+                </div>
+                <label for="fileInput">Избражение:</label>
+                <img [src]="url" height="200" *ngIf="url">
+                <div>
+                    <input #fileInput id="fileInput" type='file' value="" (change)="onSelectFile($event)"
+                        accept=".jpg, .jpeg, .png">
+                </div>
+                <label for="year">Год:</label>
+                <div>
+                    <input type="number" id="year" formControlName="year" class="form-control" min="1940" max="2045">
+                </div>
+                <label for="genre">Жанр:</label>
+                <select  id="genre" name="genre"  formControlName="genre">
+                    <option [ngValue]="null">Выберите жанр</option>
+                    <option *ngFor="let type of eGenre| keyvalue" [ngValue]="type.key">{{type.value}}</option>
+                </select>
+                <label for="duration">Продолжительность:</label>
+                <div>
+                    <input type="text" id="duration" formControlName="duration" class="form-control">
+                </div>
+                <label for="description">Описание:</label>
+                <div>
+                </div>
+            </div>
+        </form>
+        <textarea id="description" class="text" cols="80" rows="10" name="description" [(ngModel)]="description"
+            form="filmContent"></textarea>
+    </div>
+</div>

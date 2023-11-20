@@ -118,12 +118,15 @@ export class FilmsListComponent implements OnInit {
             userId: uid,
             score: i,
         }
-        this._ratingService.putRating(rating).subscribe();
+        this._ratingService.putRating(rating).subscribe(()=>{
+            this.getFilms();
+        }
+        );
 
-        this.getFilms();
+        
     }
 
-    genreConvention = (genre: string) => {
+    genreConvention = (genre: Genre) => {
         return Number(genre) in Genre ? Genre[Number(genre)] : undefined;
     }
 

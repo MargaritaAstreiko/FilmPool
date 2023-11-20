@@ -37,10 +37,10 @@ namespace FilmPool.Services
             return await _filmsRepository.Delete(id);
         }
 
-        public async Task<bool> Create(Film film)
+        public async Task<int> CreateFilm(FilmUpdateRequestModel film)
         {
-            return await _filmsRepository.Create(film);
-        }
+            return await _filmsRepository.CreateFilm(film);
+        } 
 
         public async Task<double> GetRating(int filmId)
         {

@@ -63,6 +63,14 @@ namespace FilmPool.Controllers
         }
 
 
+        [HttpPost("new")]
+        public async Task<IActionResult> CreateFilm([FromBody] FilmUpdateRequestModel film)
+        {
+            var res = await _filmsService.CreateFilm(film);
+            return Ok(res);
+        }
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveFilm(int id)
         {

@@ -4,10 +4,12 @@ using FilmPool.ResponseModels;
 
 namespace FilmPool.Repositories
 {
-  public interface ICommentsRepository
-  {
-    Task<Comments> Get(int Id);
-    Task<bool> Create(CommentRequestModel comment);
-    Task<IEnumerable<CommentsResponseModel>> GetComments(int filmId);
-  }
+    public interface ICommentsRepository
+    {
+        Task<Comments> Get(int Id);
+        Task<bool> Create(CommentRequestModel comment);
+        Task<IEnumerable<CommentsResponseModel>> GetComments(int filmId);
+        Task<bool> Update(CommentUpdateModel comment);
+        Task<Comments> Delete(int Id);
+    }
 }

@@ -1,0 +1,24 @@
+.card {
+    margin-left: 20%;
+    margin-top: 20px;
+    color: white;
+}
+
+.filminfo-desc {
+    background-color: rgb(56, 56, 52);
+    width: 60%;
+    padding: 20px;
+    border: 1px solid white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+i-bs{
+    color:rgb(221, 150, 19); 
+    float: right;
+}
+
+input,select {
+    margin-bottom: 20px;
+}
+

@@ -23,8 +23,8 @@ namespace FilmPool.Repositories
         public async Task<FilmsResponseModel> Get(int pageSize, int currentPage, int year, string search, int genre, bool ratingSort)
         {
 
-            var films =  ratingSort? Context.Films.Where(x => (genre != -1 ? x.Title.Contains(search) && x.Genre.Equals((GenreEnum)genre) : x.Title.Contains(search)) && (year == 0 ? x.Title.Length > 0 : x.Year.Equals(year))).OrderByDescending(x=>x.TotalRating).Skip((currentPage - 1) * pageSize).Take(pageSize)
-                : Context.Films.Where(x => (genre != -1 ? x.Title.Contains(search) && x.Genre.Equals((GenreEnum)genre) : x.Title.Contains(search)) && (year ==0?x.Title.Length>0: x.Year.Equals(year))).Skip((currentPage - 1) * pageSize).Take(pageSize);
+            var films = ratingSort ? Context.Films.Where(x => (genre != -1 ? x.Title.Contains(search) && x.Genre.Equals((GenreEnum)genre) : x.Title.Contains(search)) && (year == 0 ? x.Title.Length > 0 : x.Year.Equals(year))).OrderByDescending(x => x.TotalRating).Skip((currentPage - 1) * pageSize).Take(pageSize)
+                : Context.Films.Where(x => (genre != -1 ? x.Title.Contains(search) && x.Genre.Equals((GenreEnum)genre) : x.Title.Contains(search)) && (year == 0 ? x.Title.Length > 0 : x.Year.Equals(year))).Skip((currentPage - 1) * pageSize).Take(pageSize);
             List<int> ids = await films.Select(x => x.Id).ToListAsync();
             var rating = Context.Rating.Where(x => ids.Contains(x.FilmId));
             var ratingCommon = from g in rating
@@ -45,7 +45,7 @@ namespace FilmPool.Repositories
                 Year = f.Year,
                 Description = f.Description,
                 Picture = f.Picture != null && f.Picture.Length > 0 ? Convert.ToBase64String(f.Picture) : null,
-                Rating = g.Rating!=null ? g.Rating : 0,
+                Rating = g.Rating != null ? g.Rating : 0,
             };
             var all = await result.ToListAsync();
             int totalFilms = await Context.Films.Where(x => (genre != -1 ? x.Title.Contains(search) && x.Genre.Equals((GenreEnum)genre) : x.Title.Contains(search)) && (year == 0 ? x.Title.Length > 0 : x.Year.Equals(year))).CountAsync();
@@ -91,6 +91,7 @@ namespace FilmPool.Repositories
             return film;
         }
 
+
         public async Task<IEnumerable<FilmLightVersionResponse>> GetFilmsForCollections()
         {
             var films = await Context.Films.Select(x => new FilmLightVersionResponse
@@ -99,6 +100,22 @@ namespace FilmPool.Repositories
                 Title = x.Title,
             }).ToListAsync();
             return films;
+        }
+
+
+        public async Task<int> CreateFilm(FilmUpdateRequestModel film)
+        {
+            var newfilm = await Context.Films.AddAsync(new Film
+            {
+                Title = film.Title,
+                Genre = film.Genre,
+                Duration = film.Duration,
+                Year = film.Year,
+                Description = film.Description,
+            });
+            await Context.SaveChangesAsync();
+            return newfilm.Entity.Id;
+
         }
     }
 }

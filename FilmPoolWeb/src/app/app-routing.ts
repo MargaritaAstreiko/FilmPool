@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from './pages/resetPassword/resetPassword.comp
 import { UserlistComponent } from './pages/userlist/userlist.component';
 import { CollectionComponent } from './pages/collection/collection.component';
 import { UserComponent } from './pages/user/user.component';
+import { FilmCreateComponent } from './pages/create-film/create-film.component';
 
 
 
@@ -25,6 +26,7 @@ const routes: Routes = [
     { path: 'resetPassword', component: ResetPasswordComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterUserComponent },
+    { path: 'new-film', component: FilmCreateComponent, canActivate: [AuthGuard,AdminGuard]},
     { path: '', redirectTo: '/films', pathMatch: 'full' },
     { path: '**', redirectTo: '/404', pathMatch: 'full'},
     // otherwise redirect to home

@@ -21,4 +21,9 @@
       Пользователи
     </a>
   </div>
+  <div *ngIf="isAdmin">
+    <a [routerLink]="'/new-film'">
+      Добавить новый фильм
+    </a>
+  </div>
 </div>
