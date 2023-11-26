@@ -64,7 +64,7 @@ table th {
 
 caption {
     color: #FB667A;
-
+    text-align: left;
 }
 
 @media screen and (max-width: 600px) {

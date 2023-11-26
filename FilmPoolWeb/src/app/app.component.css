@@ -1,6 +1,18 @@
-.container{
-	background: linear-gradient(to bottom, rgb(104, 101, 100) 1%, rgb(51, 51, 41)); 
+.container {
+    background: linear-gradient(to bottom, rgb(104, 101, 100) 1%, rgb(51, 51, 41));
     min-height: 100%;
 }
 
-html, body{overflow:hidden;}
+html,
+body {
+    overflow: hidden;
+}
+
+button:hover,
+a:hover {
+    cursor: pointer;
+}
+
+i-bs:hover::ng-deep{
+    cursor: pointer;
+}

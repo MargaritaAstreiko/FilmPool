@@ -22,3 +22,14 @@ input,select {
     margin-bottom: 20px;
 }
 
+.img-lab {
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    width: 290px;
+    height:220px;
+    margin-bottom: 7px;
+}
+

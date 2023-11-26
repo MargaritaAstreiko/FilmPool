@@ -1,5 +1,6 @@
 using FilmPool.Data;
 using FilmPool.DbModels;
+using FilmPool.Migrations;
 using FilmPool.RequestModels;
 using FilmPool.ResponseModels;
 using Microsoft.EntityFrameworkCore;
@@ -53,13 +54,18 @@ namespace FilmPool.Repositories
 
         public async Task<bool> AddToCollection(FilmsInCollectionsRequest filmsAdd)
         {
-            Context.FilmsInCollections.Add(new FilmsInCollections
+
+            FilmsInCollections coll = await Context.FilmsInCollections.Where(x => filmsAdd.FilmId==x.FilmId && filmsAdd.CollectionId==x.CollectionId).FirstOrDefaultAsync();
+            if (coll == null)
             {
-                FilmId = filmsAdd.FilmId,
-                CollectionId = filmsAdd.CollectionId,
-                AddedDate = filmsAdd.AddedDate,
-            });
-            await Context.SaveChangesAsync();
+                Context.FilmsInCollections.Add(new FilmsInCollections
+                {
+                    FilmId = filmsAdd.FilmId,
+                    CollectionId = filmsAdd.CollectionId,
+                    AddedDate = filmsAdd.AddedDate,
+                });
+                await Context.SaveChangesAsync();
+            }
             return true;
         }
 

@@ -24,7 +24,7 @@ export class AuthenticationService {
 
   loginUser(userForAuth: UserForAuthenticationDto): Observable<AuthResponseDto> {
     return this.http
-      .post<AuthResponseDto>(`${this.apiURL}/Login`, userForAuth)
+      .post<AuthResponseDto>(`${this.apiURL}/login`, userForAuth)
   }
 
   logoutUser = () => {
@@ -47,7 +47,7 @@ export class AuthenticationService {
   }
 
   registerUser = (body: UserForRegistratioModel) => {
-    return this.http.post<UserForRegistratioModel>(`${this.apiURL}/Registration`, body);
+    return this.http.post<UserForRegistratioModel>(`${this.apiURL}/registration`, body);
   }
 
   public isUserAuthenticated = (): boolean => {
@@ -64,11 +64,11 @@ export class AuthenticationService {
   }
 
   forgotPassword(body: ForgotPasswordModel): Observable<any> {
-    return this.http.post<any>(`${this.apiURL}/ForgotPassword`, body);
+    return this.http.post<any>(`${this.apiURL}/forgot-password`, body);
 
   }
 
   public resetPassword(body: ResetPasswordModel): Observable<any> {
-    return this.http.post<any>(`${this.apiURL}/ResetPassword`, body);
+    return this.http.post<any>(`${this.apiURL}/reset-password`, body);
   }
 }

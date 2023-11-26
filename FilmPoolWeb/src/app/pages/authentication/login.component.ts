@@ -65,8 +65,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
           this.user = res.user;
         },
-        error: (err: AuthResponseDto) => {
-          this.errorMessage = 'Неверный логин или пароль';
+        error: (err: any) => {
+          this.errorMessage = err.error.errorMessage? err.error.errorMessage: "Не удалось подключиться к серверу, попробуйте позднее";
           this.showError = true;
           setTimeout(() => {
             this.errorMessage = '';

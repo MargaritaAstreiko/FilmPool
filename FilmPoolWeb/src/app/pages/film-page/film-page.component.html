@@ -7,13 +7,14 @@
                 <button class="btn" *ngIf="!addToCollection" (click)="addFilmToCollection()">Добавить в
                     коллекцию</button>
             </div>
-            <div *ngIf="addToCollection">
+            <div *ngIf="addToCollection" class="collection-add-form">
                 <label for="collectionName">Название коллекции</label>
                 <select name="collectionItem" (change)="filterChanged($event)">
+                    <option [value]="null">Выберите коллекцию</option>
                     <option *ngFor="let collection of collections" [value]="collection.id">{{collection.collectionName}}
                     </option>
                 </select>
-                <button class="btn" (click)="saveToCollection()">Добавить</button>
+                <button class="btn btn-coll" (click)="saveToCollection()">Добавить</button>
             </div>
         </div>
            <div class="film-info-full"> 
@@ -41,11 +42,13 @@
                         <input type="text" id="title" formControlName="title" class="form-control"
                             [(ngModel)]="film.title" />
                     </div>
+                    <div class="img-lab">
                     <label for="fileInput">Избражение:</label>
                     <img [src]="url" height="200" *ngIf="url">
                     <div>
                         <input #fileInput id="fileInput" type='file' value="" (change)="onSelectFile($event)"
                             accept=".jpg, .jpeg, .png">
+                    </div>
                     </div>
                     <label for="year">Год:</label>
                     <div>

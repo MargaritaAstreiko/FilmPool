@@ -59,5 +59,6 @@ label {
 .comment-icons{
     display: flex;
     margin-right: 5px;
-    justify-content: flex-end;
+    justify-content: space-around;
+    margin-left: 10px;
 }

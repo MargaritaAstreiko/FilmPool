@@ -38,7 +38,7 @@
     display: flex;
     flex-direction: column;
     padding: 10px 30px;
-    background: linear-gradient(to left, #f08fc0 0%, white, #f08fc0);
+    background: linear-gradient(to left, #f08fc0 0%, #e4d4f5bd, #f08fc0);
     border-bottom: 1px solid grey;
     color: white;
     font-size: 20px;
@@ -62,11 +62,11 @@ i-bs:last-of-type {
     background-color: rgb(56, 56, 52);
     margin-top: 20px;
     border: 2px white solid;
-    border-radius:5px;
+    border-radius: 5px;
 }
 
 .form-item {
-    padding:25px;
+    padding: 25px;
 }
 
 label {
@@ -77,5 +77,9 @@ label {
 button {
     font-size: 1.2em;
     margin: 5px;
-    border-radius:5px;
-  }
+    border-radius: 5px;
+}
+
+.coll-name{
+    padding-right: 6px;
+}

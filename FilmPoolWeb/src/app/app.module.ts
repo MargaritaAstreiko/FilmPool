@@ -73,7 +73,7 @@ export function tokenGetter() {
     })
 
   ],
-  providers: [UsersService, FilmsService, AuthenticationService,  { provide: HTTP_INTERCEPTORS,useClass: ErrorHandlerService, multi: true }],
+  providers: [UsersService, FilmsService, AuthenticationService,  /*{ provide: HTTP_INTERCEPTORS,useClass: ErrorHandlerService, multi: true }*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

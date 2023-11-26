@@ -10,7 +10,7 @@
                 <div>
                     <input type="text" id="username" formControlName="username" />
                 </div>
-                <div>
+                <div class="validation">
                     <em *ngIf="validateControl('username') && hasError('username', 'required')">Требуется логин</em>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 <div>
                     <input type="password" id="password" formControlName="password"/>
                 </div>
-                <div>
+                <div class="validation">
                     <em *ngIf="validateControl('password') && hasError('password', 'required')">Требуется пароль</em>
                 </div>
             </div>

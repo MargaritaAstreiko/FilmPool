@@ -23,8 +23,8 @@
             <div class="date-btns">
                 <div>{{comment.createdDate}}</div>
                 <div class="comment-icons">
-                    <i-bs *ngIf="comment.userId==userId" (click)="deleteComment(comment.id)" name="trash"></i-bs>
-                    <i-bs *ngIf="comment.userId==userId" (click)="changeComment(comment.id)" name="pencil"></i-bs>
+                    <i-bs *ngIf="comment.userId==userId" (click)="deleteComment(comment.id)" width="1.1rem" height="1.1rem" name="trash"></i-bs>
+                    <i-bs *ngIf="comment.userId==userId" (click)="changeComment(comment.id)" width="1.1rem" height="1.1rem"name="pencil"></i-bs>
                 </div>
             </div>
         </div>

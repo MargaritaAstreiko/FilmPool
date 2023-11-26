@@ -32,12 +32,12 @@ namespace FilmPool.Controllers
     
     }
 
-    [HttpPost("Login")]
+    [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel userForAuthentication)
     {
       var user = await _userService.AuthenticateUser(userForAuthentication.UserName, userForAuthentication.Password);
       if (user == null)
-        return Unauthorized(new LoginResponse { ErrorMessage = "Invalid Authentication" });
+        return Unauthorized(new LoginResponse { ErrorMessage = "Неверный логин или пароль" });
       var signingCredentials = _jwtHandler.GetSigningCredentials();
       var claims = _jwtHandler.GetClaims(user);
       var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
@@ -45,7 +45,7 @@ namespace FilmPool.Controllers
       return Ok(new LoginResponse { IsAuthSuccessful = true, Token = token, User=user });
     }
 
-      [HttpPost("Registration")]
+      [HttpPost("registration")]
       public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationModel userForRegistration)
       {
         if (userForRegistration == null || !ModelState.IsValid)
@@ -57,13 +57,13 @@ namespace FilmPool.Controllers
         if (!result)
         {
         //  var errors = result.Errors.Select(e => e.Description);
-          return BadRequest(new RegisterResponseModel { Errors = "User registration failed"});
+          return BadRequest(new RegisterResponseModel { Errors = "Не удалось зарегистрировать пользователя"});
         }
 
         return StatusCode(201);
       }
 
-    [HttpPost("ForgotPassword")]
+    [HttpPost("forgot-password")]
     public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordModel forgotPasswordModel)
     {
       if (!ModelState.IsValid)
@@ -87,7 +87,7 @@ namespace FilmPool.Controllers
       return Ok();
     }
 
-    [HttpPost("ResetPassword")]
+    [HttpPost("reset-password")]
     public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordModel resetPassword)
     {
       if (!ModelState.IsValid)
