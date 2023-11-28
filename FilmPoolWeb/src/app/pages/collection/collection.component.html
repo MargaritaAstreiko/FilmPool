@@ -2,7 +2,7 @@
 <div class="collections">
     <div class="col-header">Коллекции</div>
     <div *ngFor="let collection of collections" class="collection">
-        <div class="coll-items"><div class="coll-name">{{collection.collectionName}}</div>
+        <div class="coll-items"><div class="coll-name" (click)="navigateToCollectionFilms(collection.id,collection.collectionName)">{{collection.collectionName}}</div>
             <i-bs *ngIf="collection.id==activeCollection" (click)="activateCollection(collection.id)"
                 name="caret-down-fill"></i-bs>
             <i-bs *ngIf="collection.id!==activeCollection" (click)="activateCollection(collection.id)"

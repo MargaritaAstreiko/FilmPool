@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Collection } from 'src/app/models/collection.model';
 import { Film } from 'src/app/models/film.model';
 import { FilmLightModel } from 'src/app/models/filmLight.model';
@@ -20,11 +21,11 @@ export class CollectionComponent implements OnInit {
   filmSelected!: FilmLightModel;
   activeCollection!: number|null;
   userId = localStorage.getItem("userId") || 0;
-
   constructor(
     private _collectionsService: CollectionsService,
-
+    private _router: Router,
   ) { }
+
   ngOnInit() {
     this._collectionsService.getCollection(+this.userId).subscribe(data => {
       this.collections = data;
@@ -64,6 +65,16 @@ export class CollectionComponent implements OnInit {
   removeCollection = (id: number) => {
     this._collectionsService.removeCollection(id).subscribe();
 
+  }
+
+  navigateToCollectionFilms(id:number, collname: string){
+    this._router.navigate(['films'], {
+     queryParams: {
+       collectionId: id,
+       collectionName: collname,
+     },
+     queryParamsHandling: 'merge',
+   });
   }
 }
 

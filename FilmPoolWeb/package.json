@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json",
+    "start": "ng serve --ssl false --proxy-config proxy.config.json",
     "build": "ng build --prod --output-path ../Project.WebApi/wwwroot",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

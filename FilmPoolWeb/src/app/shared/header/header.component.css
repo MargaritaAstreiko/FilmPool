@@ -24,11 +24,22 @@
   background-color: #534038;
 }
 
-.user-info{
+.user-info {
   font-size: 16px;
+  display: flex;
+  flex-direction: row;
 }
 
-a{
-  text-decoration:none; 
+a {
+  text-decoration: none;
   color: #ec4197;
+}
+
+.collection-filtered {
+  color: white;
+  margin-left: 50%;
+  border:none ;
+  height: 20px;
+  text-shadow: none;
+  background-color: rgb(221, 150, 19) ;
 }

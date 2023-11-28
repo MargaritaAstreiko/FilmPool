@@ -26,10 +26,12 @@ export class FilmsListComponent implements OnInit {
     pageSize = 3;
     currentPage = 1;
     searchText = '';
+    collectionName!: string;
     getScreenHeight!: number
     max = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     rating = false;
     year!: number;
+    collectionId = 0;
     genre: Genre | undefined;
     @ViewChild('filmFilter') child: FilmFilterComponent | undefined;
     @ViewChild('filmHeasers') secchild: HeaderComponent | undefined;
@@ -37,8 +39,8 @@ export class FilmsListComponent implements OnInit {
         private _filmsService: FilmsService,
         private _ratingService: RatingService,
         private _authService: AuthenticationService,
-        private router: Router,
-        private route: ActivatedRoute
+        private _router: Router,
+        private _route: ActivatedRoute
 
     ) { }
 
@@ -47,6 +49,11 @@ export class FilmsListComponent implements OnInit {
         this.isAdmin = this._authService.isUserAdmin();
         this.getScreenHeight = window.innerHeight;
         this.determinePageSize(this.getScreenHeight);
+        this._route.queryParams.subscribe(params => {
+            this.collectionId = params['collectionId'].length>0? + params['collectionId']: 0;
+            this.collectionName = params['collectionName']
+            this.getFilms();
+        })
     }
 
     @HostListener('window:resize', ['$event'])
@@ -56,7 +63,7 @@ export class FilmsListComponent implements OnInit {
     }
 
     getFilms() {
-        this._filmsService.getFilms(this.pageSize, this.currentPage, this.year, this.searchText, this.genre, this.rating).subscribe(data => {
+        this._filmsService.getFilms(this.pageSize, this.currentPage, this.year, this.searchText, this.genre, this.rating, this.collectionId).subscribe(data => {
             this.films = data.films.map(i => {
                 i.picture = i.picture?.length > 0 ? `data:image/jpg;base64,${i.picture}` : "/assets/nofilm.png";
                 return i
@@ -95,7 +102,7 @@ export class FilmsListComponent implements OnInit {
     }
 
     toFilm(id: number) {
-        this.router.navigate(['film', id], {
+        this._router.navigate(['film', id], {
         });
     }
 
@@ -118,12 +125,12 @@ export class FilmsListComponent implements OnInit {
             userId: uid,
             score: i,
         }
-        this._ratingService.putRating(rating).subscribe(()=>{
+        this._ratingService.putRating(rating).subscribe(() => {
             this.getFilms();
         }
         );
 
-        
+
     }
 
     genreConvention = (genre: Genre) => {
@@ -133,5 +140,9 @@ export class FilmsListComponent implements OnInit {
     ratingSort = () => {
         this.rating = !this.rating;
         this.getFilms();
+    }
+
+    removeFilm = (id: number) => {
+        return this._filmsService.deleteFilm(id).subscribe();
     }
 }

@@ -10,5 +10,6 @@ namespace FilmPool.RequestModels
         public string? search { get; set; }
         public Genre? genre { get; set; }
         public bool? rating { get; set; }
+        public int? collectionId { get; set; }
     }
 }

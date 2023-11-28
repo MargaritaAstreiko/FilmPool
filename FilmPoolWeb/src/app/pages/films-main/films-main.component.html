@@ -1,4 +1,4 @@
-<app-filmHeaders class='app-headers' #filmHeaders></app-filmHeaders>
+<app-filmHeaders class='app-headers' #filmHeaders [collectionName]="collectionName"></app-filmHeaders>
 <div class="films-container">
   <app-filmFilter class='app-filters' #filmFilter (genre)="filterGenre($event)" (year)="filterYear($event)"></app-filmFilter>
   <div class="films-content">
@@ -14,7 +14,10 @@
         <tr *ngFor="let film of films | paginate: config">
           <div class="film-info">
             <div class="top">
-              <div class="film-title" (click)="toFilm(film.id);">{{film.title}}</div>
+              <div class="del-name">
+              <div class="film-title" (click)="toFilm(film.id);">{{film.title}}</div> 
+              <div *ngIf="isAdmin"><i-bs class="trash" name="trash" (click)="removeFilm(film.id)"></i-bs></div>
+            </div>
               <div class="star-rating">
                 <div class="stars" *ngFor="let i of max">
                   <input *ngIf="film.rating && film.rating>=i" type="radio" id="star{{i}}" name="rating" value="{{i}}"

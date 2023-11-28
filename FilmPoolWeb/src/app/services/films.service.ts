@@ -19,9 +19,9 @@ export class FilmsService {
     )
 
 
-  getFilms(pageSize: number, currentPage: number, year?: number, search?: string, genre?: Genre, rating?: boolean) : Observable<FilmResponseModel> {
+  getFilms(pageSize: number, currentPage: number, year?: number, search?: string, genre?: Genre, rating?: boolean, collectionId?: number ) : Observable<FilmResponseModel> {
     return this.http
-      .post<FilmResponseModel>(`${this.apiURL}/films`,{pageSize:pageSize,currentPage:currentPage, year:year, search:search, genre:genre, rating:rating})
+      .post<FilmResponseModel>(`${this.apiURL}/films`,{pageSize:pageSize,currentPage:currentPage, year:year, search:search, genre:genre, rating:rating, collectionId:collectionId})
   }
 
   getFilm(id: number): Observable<FilmInfo>{
@@ -53,6 +53,11 @@ export class FilmsService {
   getFilmsLight(): Observable<FilmLightModel[]>{
     return this.http
     .get<FilmLightModel[]>(`${this.apiURL}/films/Light`,)
+
+  }
+
+  deleteFilm( id: number): Observable<number>{
+    return this.http.delete<number>(`${this.apiURL}/films/${id}`)
 
   }
 

@@ -29,12 +29,13 @@ namespace FilmPool.Controllers
         {
             string search = filmsRequestModel.search ?? string.Empty;
             int genre = filmsRequestModel.genre?.GenreName.Length > 0 ? (int)filmsRequestModel.genre.Id : -1;
-            var films = await _filmsService.Get(filmsRequestModel.pageSize, filmsRequestModel.currentPage, filmsRequestModel.year, search, genre, (bool)filmsRequestModel.rating);
+            var films = await _filmsService.Get(filmsRequestModel.pageSize, filmsRequestModel.currentPage, filmsRequestModel.year, search, genre, (bool)filmsRequestModel.rating, (int)filmsRequestModel.collectionId);
 
             return Ok(films);
         }
 
         [HttpPost("Picture/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PostPicture( int id, IFormFile file)
         {
             await using var memoryStream = new MemoryStream();
@@ -56,6 +57,7 @@ namespace FilmPool.Controllers
         }
 
         [HttpPost("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateFilm([FromBody] FilmUpdateRequestModel film)
         {
             var res = await _filmsService.Update(film);
@@ -64,6 +66,7 @@ namespace FilmPool.Controllers
 
 
         [HttpPost("new")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateFilm([FromBody] FilmUpdateRequestModel film)
         {
             var res = await _filmsService.CreateFilm(film);
@@ -72,6 +75,7 @@ namespace FilmPool.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RemoveFilm(int id)
         {
             var res = await _filmsService.Delete(id);

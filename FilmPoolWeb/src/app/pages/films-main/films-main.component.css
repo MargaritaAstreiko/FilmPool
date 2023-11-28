@@ -195,3 +195,9 @@ label {
 .white{
     color: white;
 }
+
+.del-name{
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
