@@ -6,7 +6,7 @@ namespace FilmPool.Services
 {
     public interface  ICollectionsService
     {
-        Task<bool> Create(CollectionRequestModel comment);
+        Task<bool> Create(Collections collection);
         Task<IEnumerable<CollectionsResponseModel>> GetCollections(int userId);
         Task<bool> AddToCollection(FilmsInCollectionsRequest filmsAdd);
         Task<Collections> Delete(int Id);

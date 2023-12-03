@@ -1,4 +1,5 @@
-﻿using FilmPool.DbModels;
+﻿using AutoMapper;
+using FilmPool.DbModels;
 using FilmPool.RequestModels;
 using FilmPool.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,16 +13,19 @@ namespace FilmPool.Controllers
     public class CollectionsController : Controller
     {
         ICollectionsService _collectionsService;
+        private readonly IMapper _mapper;
 
-        public CollectionsController(ICollectionsService collectionsService)
+        public CollectionsController(ICollectionsService collectionsService, IMapper mapper)
         {
             _collectionsService = collectionsService;
+            _mapper = mapper;
         }
 
         [HttpPost]
         public async Task<IActionResult> AddCollection([FromBody] CollectionRequestModel collection)
         {
-            var colletions = await _collectionsService.Create(collection);
+            var collectionModel = _mapper.Map<Collections>(collection);
+            var colletions = await _collectionsService.Create(collectionModel);
             return Ok();
         }
 

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FilmPool.DbModels;
+﻿using FilmPool.DbModels;
 using FilmPool.Repositories;
 using FilmPool.RequestModels;
 using FilmPool.ResponseModels;
@@ -9,17 +8,14 @@ namespace FilmPool.Services
     public class CollectionsService: ICollectionsService
     {
         private readonly ICollectionsRepository _collectionsRepository;
-        private readonly IMapper _mapper;
 
-
-        public CollectionsService(ICollectionsRepository context, IMapper mapper)
+        public CollectionsService(ICollectionsRepository context)
         {
             _collectionsRepository = context;
-            _mapper = mapper;
         }
-        public async Task<bool> Create(CollectionRequestModel comment)
+        public async Task<bool> Create(Collections collection)
         {
-            return await _collectionsRepository.Create(comment);
+            return await _collectionsRepository.Create(collection);
         }
 
         public async Task<IEnumerable<CollectionsResponseModel>>GetCollections(int userId)

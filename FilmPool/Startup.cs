@@ -23,6 +23,7 @@ using FilmPool.DbModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using FilmPool.RequestModels;
+using FilmPool.Profilies;
 
 namespace Project.WebApi
 {
@@ -90,6 +91,7 @@ namespace Project.WebApi
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new UserProfile());
+                mc.AddProfile(new CollectionProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();

@@ -38,12 +38,16 @@
   flex-direction: column;
 }
 
+.filtered{
+  padding-left: 12px;
+}
+
 .description {
   padding-left: 10px;
   font-size: 12px;
   text-align: justify;
   word-wrap: break-word;
-  width: 75%;
+  width: 70%;
 }
 
 .film-main-content {

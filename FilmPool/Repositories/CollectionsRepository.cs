@@ -19,14 +19,14 @@ namespace FilmPool.Repositories
         {
             return await Context.Collections.FindAsync(Id);
         }
-        public async Task<bool> Create(CollectionRequestModel collection)
+        public async Task<bool> Create(Collections collection)
         {
             Context.Collections.Add(new Collections
             {
                 UserId = collection.UserId,
                 CollectionName = collection.CollectionName,
                 CreatedDate = collection.CreatedDate,
-                IsPublic = collection.isPublic,
+                IsPublic = collection.IsPublic,
             });
             await Context.SaveChangesAsync();
             return true;

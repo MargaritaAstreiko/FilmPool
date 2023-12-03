@@ -5,7 +5,7 @@ namespace FilmPool.RequestModels
         public int UserId { get; set; }
         public string CollectionName { get; set; }
         public DateTime CreatedDate { get; set; }
-        public bool isPublic { get; set;}
+        public bool IsPublic { get; set;}
 
     }
 }
