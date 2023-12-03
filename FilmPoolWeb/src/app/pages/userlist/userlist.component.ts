@@ -12,21 +12,46 @@ import { HeaderComponent } from '../../shared/header/header.component';
 export class UserlistComponent implements OnInit {
   users!: User[];
   editMode: boolean | undefined;
+  username!: string;
+  user!: User;
 
   @ViewChild('filmHeaders') secchild: HeaderComponent | undefined;
   constructor(
-      private _usersService: UsersService
-  ) {}
-  
+    private _usersService: UsersService
+  ) { }
+
 
   ngOnInit() {
-     this._usersService.getUsers().subscribe( data=>{
-      this.users=data;
-     });
+    this._usersService.getUsers().subscribe(data => {
+      this.users = data;
+    });
+
   }
 
   enableEditMode() {
     this.editMode = !this.editMode;
-}
+  }
 
+
+  fieldsChange=(user:User)=>{
+    this.user = user;
+    this.username = user.userName
+
+  }
+
+  block=(user:User)=>{
+    this.username = '';
+    this._usersService.blockUser(user.id).subscribe();
+    this._usersService.getUsers().subscribe(data => {
+      this.users = data;
+    });
+
+  }
+
+  notblock=()=>{
+    this.username = '';
+    this._usersService.getUsers().subscribe(data => {
+      this.users = data;
+    });
+  }
 }

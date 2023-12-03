@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { Genre } from 'src/app/models/genre.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { GenresService } from 'src/app/services/genres.service';
@@ -42,5 +42,11 @@ export class FilmFilterComponent implements OnInit {
     this.year.emit(year);
     this.yearSelected=year;
   }
+
+  clean() {
+    this.genreSelected = 0;
+    this.yearSelected = 0;
+  }
+
 }
 

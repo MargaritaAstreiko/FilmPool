@@ -43,6 +43,7 @@ namespace FilmPool.Controllers
             var bytes = memoryStream.ToArray();
             var picture = new Picture();
             var res = picture.UploadImage(bytes, id,"dbo.Films");
+
             return Ok(res);
         }
 

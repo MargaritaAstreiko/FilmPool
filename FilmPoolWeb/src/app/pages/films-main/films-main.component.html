@@ -1,13 +1,17 @@
 <app-filmHeaders class='app-headers' #filmHeaders [collectionName]="collectionName"></app-filmHeaders>
 <div class="films-container">
-  <app-filmFilter class='app-filters' #filmFilter (genre)="filterGenre($event)" (year)="filterYear($event)"></app-filmFilter>
+  <app-filmFilter class='app-filters' #filmFilter (genre)="filterGenre($event)"
+    (year)="filterYear($event)"></app-filmFilter>
   <div class="films-content">
     <div class="searchform">
       <label>
         <input type="search" class="nosubmit" id="search-text" aria-describedby="search-text" [(ngModel)]="searchText"
           placeholder="Поиск..." (ngModelChange)="onValueChanged($event)" autofocus>
       </label>
-      <div class="rating">Рейтинг<i-bs class="{{rating ?'yellow':'white'}}" (click)="ratingSort()" name="arrow-up"></i-bs></div>
+      <div class="rating">Рейтинг<i-bs class="{{rating ?'yellow':'white'}}" (click)="ratingSort()"
+          name="arrow-up"></i-bs>
+        <div class="filtered"><i-bs class="{{rating||year||genre||collectionId ?'yellow':'white'}}" name="filter" height="1.4rem" width="1.4rem" (click)="clean()"></i-bs></div>
+      </div>
     </div>
     <table class="table">
       <tbody>
@@ -15,9 +19,9 @@
           <div class="film-info">
             <div class="top">
               <div class="del-name">
-              <div class="film-title" (click)="toFilm(film.id);">{{film.title}}</div> 
-              <div *ngIf="isAdmin"><i-bs class="trash" name="trash" (click)="removeFilm(film.id)"></i-bs></div>
-            </div>
+                <div class="film-title" (click)="toFilm(film.id);">{{film.title}}</div>
+                <div *ngIf="isAdmin"><i-bs class="trash" name="trash" (click)="removeFilm(film.id)"></i-bs></div>
+              </div>
               <div class="star-rating">
                 <div class="stars" *ngFor="let i of max">
                   <input *ngIf="film.rating && film.rating>=i" type="radio" id="star{{i}}" name="rating" value="{{i}}"
@@ -34,9 +38,10 @@
                 <div class="year">Год {{film.year}} </div>
               </div>
             </td>
-            <td><div class="film-main-content"><img src={{film.picture}} alt="image" width="180px" height="130px">
-              <div class="description">
-                {{film.description}}</div>
+            <td>
+              <div class="film-main-content"><img src={{film.picture}} alt="image" width="180px" height="130px">
+                <div class="description">
+                  {{film.description}}</div>
               </div>
             </td>
           </div>

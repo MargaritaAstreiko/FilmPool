@@ -1,4 +1,5 @@
-﻿using FilmPool.DbModels;
+﻿using AutoMapper;
+using FilmPool.DbModels;
 using FilmPool.Repositories;
 using FilmPool.RequestModels;
 using FilmPool.ResponseModels;
@@ -8,11 +9,13 @@ namespace FilmPool.Services
     public class CollectionsService: ICollectionsService
     {
         private readonly ICollectionsRepository _collectionsRepository;
+        private readonly IMapper _mapper;
 
 
-        public CollectionsService(ICollectionsRepository context)
+        public CollectionsService(ICollectionsRepository context, IMapper mapper)
         {
             _collectionsRepository = context;
+            _mapper = mapper;
         }
         public async Task<bool> Create(CollectionRequestModel comment)
         {

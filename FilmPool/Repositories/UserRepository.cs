@@ -76,7 +76,7 @@ namespace FilmPool.Repositories
         public async Task<bool> BlockUser(int Id)
         {
             User currentUser = await Get(Id);
-            currentUser.IsBlocked = true;
+            currentUser.IsBlocked = !currentUser.IsBlocked;
             Context.Users.Update(currentUser);
             await Context.SaveChangesAsync();
             return true;

@@ -10,5 +10,6 @@ export class User {
     userRole!: Role;
     role!: any| null;
     picture!: string;
+    isBlocked!: boolean;
 
 }

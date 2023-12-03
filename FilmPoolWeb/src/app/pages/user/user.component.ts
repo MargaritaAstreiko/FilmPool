@@ -44,7 +44,7 @@ export class UserComponent implements OnInit {
 
     this.fileToUpload = event.target.files[0]
     if (this.fileToUpload?.name) {
-
+      console.log(this.fileToUpload.name)
       const fileReader: FileReader = new FileReader();
       fileReader.readAsDataURL(this.fileToUpload);
 
@@ -72,11 +72,13 @@ export class UserComponent implements OnInit {
       password: this.user.password,
       userRole: this.user.userRole,
       role: this.user.role,
-      picture: ''
+      picture: '',
+      isBlocked: this.user.isBlocked
     }
 
     if (this.fileToUpload?.name) {
 
+      console.log(this.fileToUpload.name)
       const fileReader: FileReader = new FileReader();
       fileReader.readAsDataURL(this.fileToUpload);
 

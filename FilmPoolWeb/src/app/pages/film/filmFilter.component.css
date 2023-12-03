@@ -28,3 +28,11 @@ a {
   text-decoration: none;
   color: #ec4197;
 }
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  padding-left: 7px;
+}

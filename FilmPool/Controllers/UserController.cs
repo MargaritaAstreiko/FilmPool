@@ -34,7 +34,7 @@ namespace FilmPool.Controllers
             return Ok(user);
         }
 
-        [HttpPost("Picture")]
+        [HttpPost("Picture/{id}")]
         public async Task<IActionResult> PostPicture(IFormFile file)
         {
             await using var memoryStream = new MemoryStream();
@@ -50,6 +50,14 @@ namespace FilmPool.Controllers
         public async Task<IActionResult> UpdateUser([FromBody] UserUpdateRequestModel user)
         {
             var res = await _userService.Update(user);
+            return Ok(res);
+        }
+
+
+        [HttpGet("block/{id}")]
+        public async Task<IActionResult> BlockUser(int Id)
+        {
+            var res = await _userService.BlockUser(Id);
             return Ok(res);
         }
 

@@ -10,7 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-    @Input() collectionName = ''
+    @Input() collectionName = '' 
     user!: User;
     userId!: number;
     constructor(

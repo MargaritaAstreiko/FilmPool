@@ -30,7 +30,7 @@ export class FilmsListComponent implements OnInit {
     getScreenHeight!: number
     max = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     rating = false;
-    year!: number;
+    year!: number | undefined;
     collectionId = 0;
     genre: Genre | undefined;
     @ViewChild('filmFilter') child: FilmFilterComponent | undefined;
@@ -144,5 +144,30 @@ export class FilmsListComponent implements OnInit {
 
     removeFilm = (id: number) => {
         return this._filmsService.deleteFilm(id).subscribe();
+    }
+
+    removeQueryParams(){
+        this._router.navigate(
+          [],
+          {
+            queryParams: {
+              collectionId: null,   
+              collectionName: null, 
+            },
+            queryParamsHandling: 'merge',
+          }
+        )
+      }
+
+    clean=()=>{
+        this.rating = false;
+        this.collectionId = 0;
+        this.searchText= '';
+        this.genre  = undefined;
+        this.year = undefined;
+        this.collectionName = '';
+        this.child?.clean();
+        this.removeQueryParams();
+        this.getFilms();
     }
 }

@@ -1,5 +1,5 @@
 <app-filmHeaders class='app-headers' #filmHeaders></app-filmHeaders>
-<div class="container">
+<div class="{{username? 'container hide': 'container'}}">
   <div class="users">
     <table class="table">
       <caption>Пользователи</caption>
@@ -26,10 +26,15 @@
             <div> {{user.email}}</div>
           </td>
           <td>
-            <div><input type="checkbox"></div>
+            <div><input (change)="fieldsChange(user)" type="checkbox" [(ngModel)]="user.isBlocked"></div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
+<div *ngIf="username" class="check-window">
+  <p *ngIf="user.isBlocked">Вы уверены, что хотите заблокировать пользователя {{username}}?</p>
+  <p *ngIf="!user.isBlocked">Вы уверены, что хотите разблокировать пользователя {{username}}?</p>
+  <div class="btns"><button (click)="block(user)" class="btn">Да</button><button class="btn" (click)="notblock()" >Нет</button></div>
 </div>
