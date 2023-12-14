@@ -4,7 +4,9 @@ import { Observable, throwError } from 'rxjs';
 import { Rating } from '../models/rating.model';
 import { env } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 
 
 export class RatingService {

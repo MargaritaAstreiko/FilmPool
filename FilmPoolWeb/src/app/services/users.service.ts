@@ -5,7 +5,9 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError, tap } from 'rxjs/operators';
 import { env } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 
 export class UsersService {
   apiURL = env.apiUrl;

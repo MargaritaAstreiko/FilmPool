@@ -5,7 +5,10 @@ import { Collection } from '../models/collection.model';
 import { FilmToCollection } from '../models/filmAddToCollection.model';
 import { env } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
+
 
 export class CollectionsService {
   apiURL = env.apiUrl;

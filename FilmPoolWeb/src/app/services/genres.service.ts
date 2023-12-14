@@ -5,7 +5,9 @@ import { retry, catchError } from 'rxjs/operators';
 import { Genre } from '../models/genre.model';
 import { env } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 
 export class GenresService {
   apiURL = env.apiUrl;

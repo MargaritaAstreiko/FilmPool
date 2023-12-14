@@ -9,7 +9,9 @@ import { FilmInfo } from '../models/film-info.model';
 import { FilmLightModel } from '../models/filmLight.model';
 import { env } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 
 export class FilmsService {
   apiURL = env.apiUrl;
