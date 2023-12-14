@@ -3,12 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Collection } from '../models/collection.model';
 import { FilmToCollection } from '../models/filmAddToCollection.model';
+import { env } from 'src/environments/environment';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
+
 export class CollectionsService {
-  apiURL = 'https://localhost:5001/api';
+  apiURL = env.apiUrl;
   constructor(private http: HttpClient) {}
   httpOptions = {
     headers: new HttpHeaders({

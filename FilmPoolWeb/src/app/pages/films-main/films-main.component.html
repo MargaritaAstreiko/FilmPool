@@ -1,5 +1,5 @@
 <app-filmHeaders class='app-headers' #filmHeaders [collectionName]="collectionName"></app-filmHeaders>
-<div class="films-container">
+<div class="{{filmToDelName? 'films-container hide': 'films-container'}}">
   <app-filmFilter class='app-filters' #filmFilter (genre)="filterGenre($event)"
     (year)="filterYear($event)"></app-filmFilter>
   <div class="films-content">
@@ -10,7 +10,8 @@
       </label>
       <div class="rating">Рейтинг<i-bs class="{{rating ?'yellow':'white'}}" (click)="ratingSort()"
           name="arrow-up"></i-bs>
-        <div class="filtered"><i-bs class="{{rating||year||genre||collectionId ?'yellow':'white'}}" name="filter" height="1.4rem" width="1.4rem" (click)="clean()"></i-bs></div>
+        <div class="filtered"><span class="{{rating||year||genre||collectionId ?'tooltip':''}}" data-tooltip="Очистить фильтры"> <i-bs class="{{rating||year||genre||collectionId ?'yellow':'white'}}" name="filter"
+            height="1.4rem" width="1.4rem" (click)="clean()"></i-bs></span></div>
       </div>
     </div>
     <table class="table">
@@ -20,7 +21,8 @@
             <div class="top">
               <div class="del-name">
                 <div class="film-title" (click)="toFilm(film.id);">{{film.title}}</div>
-                <div *ngIf="isAdmin"><i-bs class="trash" name="trash" (click)="removeFilm(film.id)"></i-bs></div>
+                <div *ngIf="isAdmin"><span class="tooltip" data-tooltip="Удалить фильм"> 
+                    <i-bs class="trash" name="trash" (click)="filmToRemove(film)"></i-bs></span></div>
               </div>
               <div class="star-rating">
                 <div class="stars" *ngFor="let i of max">
@@ -48,7 +50,17 @@
         </tr>
       </tbody>
     </table>
-    <pagination-controls id="basicPaginate" (pageChange)="pageChanged($event)" previousLabel="Предыдущая"
-      nextLabel="Следующая"></pagination-controls>
+    <div class="pag">
+      <pagination-controls id="basicPaginate" (pageChange)="pageChanged($event)" previousLabel="Предыдущая"
+        nextLabel="Следующая"></pagination-controls>
+    </div>
   </div>
+</div>
+
+<div *ngIf="filmToDelName" class="check-window" data-target="#modal">
+  <button type="button" class="close"
+      (click)="notDelete()">&times;</button>
+    <p>Вы уверены, что хотите удалить фильм {{filmToDelName}}?</p> 
+  <div class="btns"><button (click)="removeFilm(filmToDelId)" class="btn">Да</button><button class="btn"
+      (click)="notDelete()">Нет</button></div>
 </div>

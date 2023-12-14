@@ -3,12 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Comment } from '../models/comment.model';
 import { CommentCreateModel } from '../models/commentcreate.model';
+import { env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class CommentsService {
-  apiURL = 'https://localhost:5001/api';
+  apiURL = env.apiUrl;
   constructor(private http: HttpClient) {}
   httpOptions = {
     headers: new HttpHeaders({

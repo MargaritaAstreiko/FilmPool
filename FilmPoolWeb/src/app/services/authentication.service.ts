@@ -8,12 +8,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { ForgotPasswordModel } from '../models/forgotPassword.model';
 import { ResetPasswordModel } from '../models/resetPassword.model';
 import { User } from '../models/user.model';
+import { env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthenticationService {
-  apiURL = 'https://localhost:5001/api';
+  apiURL = env.apiUrl;
   user!:User;
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
   httpOptions = {

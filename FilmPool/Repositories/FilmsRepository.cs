@@ -68,7 +68,7 @@ namespace FilmPool.Repositories
             await Context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> Update(FilmUpdateRequestModel film)
+        public async Task<bool> Update(Film film)
         {
             Film currentFilm = await Get(film.Id);
             currentFilm.Title = film.Title;
@@ -108,7 +108,7 @@ namespace FilmPool.Repositories
         }
 
 
-        public async Task<int> CreateFilm(FilmUpdateRequestModel film)
+        public async Task<int> CreateFilm(Film film)
         {
             var newfilm = await Context.Films.AddAsync(new Film
             {

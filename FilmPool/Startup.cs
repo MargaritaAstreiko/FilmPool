@@ -92,6 +92,7 @@ namespace Project.WebApi
             {
                 mc.AddProfile(new UserProfile());
                 mc.AddProfile(new CollectionProfile());
+                mc.AddProfile(new FilmProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();

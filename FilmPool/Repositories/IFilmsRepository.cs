@@ -8,9 +8,9 @@ namespace FilmPool.Repositories
     {
         Task<FilmsResponseModel> Get(int pageSize, int currentPage, int year, string search, int genre, bool rating, int collectionId);
         Task<Film> Get(int id);
-        Task<bool> Update(FilmUpdateRequestModel film);
+        Task<bool> Update(Film film);
         Task<Film> Delete(int id);
         Task<IEnumerable<FilmLightVersionResponse>> GetFilmsForCollections();
-        Task<int> CreateFilm(FilmUpdateRequestModel film);
+        Task<int> CreateFilm(Film film);
     }
 }

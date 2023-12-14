@@ -27,7 +27,9 @@ export class FilmsListComponent implements OnInit {
     currentPage = 1;
     searchText = '';
     collectionName!: string;
-    getScreenHeight!: number
+    getScreenHeight!: number;
+    filmToDelId!: number;
+    filmToDelName!: string;
     max = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     rating = false;
     year!: number | undefined;
@@ -50,7 +52,7 @@ export class FilmsListComponent implements OnInit {
         this.getScreenHeight = window.innerHeight;
         this.determinePageSize(this.getScreenHeight);
         this._route.queryParams.subscribe(params => {
-            this.collectionId = params['collectionId'].length>0? + params['collectionId']: 0;
+            this.collectionId = params['collectionId']?.length > 0 ? + params['collectionId'] : 0;
             this.collectionName = params['collectionName']
             this.getFilms();
         })
@@ -116,6 +118,17 @@ export class FilmsListComponent implements OnInit {
         this.getFilms();
     }
 
+    filmToRemove = (film: Film) => {
+        this.filmToDelId = film.id;
+        console.log(this.filmToDelId)
+        this.filmToDelName = film.title;
+    }
+
+    notDelete=()=>{
+        this.filmToDelId = -1;
+        this.filmToDelName = '';
+    }
+
     toggleRating = (i: number, filmId: number) => {
         let userId = localStorage.getItem("userId");
         let uid = userId && userId?.length > 0 ? +userId : 0;
@@ -143,31 +156,39 @@ export class FilmsListComponent implements OnInit {
     }
 
     removeFilm = (id: number) => {
-        return this._filmsService.deleteFilm(id).subscribe();
+     this._filmsService.deleteFilm(id).subscribe();
+     this.getFilms();
+     this.notDelete();
+
     }
 
-    removeQueryParams(){
+    removeQueryParams() {
         this._router.navigate(
-          [],
-          {
-            queryParams: {
-              collectionId: null,   
-              collectionName: null, 
-            },
-            queryParamsHandling: 'merge',
-          }
+            [],
+            {
+                queryParams: {
+                    collectionId: null,
+                    collectionName: null,
+                },
+                queryParamsHandling: 'merge',
+            }
         )
-      }
+    }
 
-    clean=()=>{
+    clean = () => {
         this.rating = false;
         this.collectionId = 0;
-        this.searchText= '';
-        this.genre  = undefined;
+        this.searchText = '';
+        this.genre = undefined;
         this.year = undefined;
         this.collectionName = '';
         this.child?.clean();
         this.removeQueryParams();
         this.getFilms();
     }
+
+    hideModalDialog = (event:any) => {
+        this.filmToDelName? this.notDelete() : null; 
+    }
+
 }

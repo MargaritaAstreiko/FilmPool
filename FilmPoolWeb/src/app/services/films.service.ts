@@ -7,11 +7,12 @@ import { FilmResponseModel } from '../models/filmsResponseModel';
 import { Genre } from '../enums/genre.enum';
 import { FilmInfo } from '../models/film-info.model';
 import { FilmLightModel } from '../models/filmLight.model';
-@Injectable({
-  providedIn: 'root',
-})
+import { env } from 'src/environments/environment';
+
+@Injectable()
+
 export class FilmsService {
-  apiURL = 'https://localhost:5001/api';
+  apiURL = env.apiUrl;
   token = localStorage.getItem("token");
   constructor(private http: HttpClient) {}
    headers =  new HttpHeaders().set(

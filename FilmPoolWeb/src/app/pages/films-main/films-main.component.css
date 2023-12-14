@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: row;
   height: 93.5vh;
-
+  position: absolute;
+  width: 100%;
 }
 
 .new-row {
@@ -20,6 +21,10 @@
   display: flex;
 }
 
+.hide {
+  opacity: 0.5;
+}
+
 .filmdetails {
   display: flex;
   flex-direction: column;
@@ -33,6 +38,11 @@
   margin-right: 50px;
 }
 
+.btns{
+  display: flex;
+  justify-content: space-around;
+}
+
 .film-info {
   display: flex;
   flex-direction: column;
@@ -40,6 +50,12 @@
 
 .filtered{
   padding-left: 12px;
+} 
+
+.modal-window {
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
 }
 
 .description {
@@ -151,8 +167,19 @@ tr:hover {
 
 .films-content {
   margin-left: auto;
-  margin-left: auto;
   width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pag{
+  margin-top: auto;
+}
+
+.table-pag{
+  display: flex;
+  flex-direction: column;
 }
 
 table {
@@ -179,6 +206,11 @@ input.nosubmit {
 
 #basicPaginate ::ng-deep .ngx-pagination .current {
   background-color: #ec4197 !important;
+}
+
+#basicPaginate ::ng-deep .ngx-pagination {
+  transform: translateY(-100%);
+  margin-top: auto;
 }
 
 #basicPaginate ::ng-deep .ngx-pagination a,
@@ -223,4 +255,62 @@ label {
 
 .filter {
   margin-left: 8px;
+}
+
+.check-window{
+  background-color: rgb(231 131 58);;
+  color: white;
+  width: 45%;
+  height: 30%;
+  z-index: 3;
+  text-align: center;
+  margin-left: auto;
+  margin: auto;
+  position: relative;
+  border: 1px solid black;
+  border-radius: 5px; 
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  padding: 14px 20px;
+  border-radius: 3px;
+  line-height: 0.3;
+  background: rgb(56, 56, 52);
+  text-decoration: none;
+  color: white;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  position: relative;
+  transition: background-color .6s ease;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.tooltip::after {
+	background: rgba(0, 0, 0, 0.8);
+	border-radius: 8px 8px 8px 0px;
+	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+	color: #FFF;
+	content: attr(data-tooltip); 
+	margin-top: -24px;
+	opacity: 0; 
+	padding: 3px 7px;
+	position: absolute;
+	visibility: hidden; 
+	transition: all 0.4s ease-in-out; 
+}
+		
+.tooltip:hover::after {
+	opacity: 1; 
+	visibility: visible;
+}
+
+
+.close {
+  align-self: flex-end;
+  margin-right: 5px;
+  margin-top: 5px;
 }

@@ -34,7 +34,8 @@
   </div>
 </div>
 <div *ngIf="username" class="check-window">
-  <p *ngIf="user.isBlocked">Вы уверены, что хотите заблокировать пользователя {{username}}?</p>
+  <button type="button" class="close"(click)="notblock()">&times;</button>
+  <p *ngIf="user.isBlocked">Вы уверены, что хотите заблокировать пользователя {{username}}?</p> 
   <p *ngIf="!user.isBlocked">Вы уверены, что хотите разблокировать пользователя {{username}}?</p>
   <div class="btns"><button (click)="block(user)" class="btn">Да</button><button class="btn" (click)="notblock()" >Нет</button></div>
 </div>

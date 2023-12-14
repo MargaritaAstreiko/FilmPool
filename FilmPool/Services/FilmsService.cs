@@ -27,7 +27,7 @@ namespace FilmPool.Services
         {
             return await _filmsRepository.Get(id);
         }
-        public async Task<bool> Update(FilmUpdateRequestModel film)
+        public async Task<bool> Update(Film film)
         {
             return await _filmsRepository.Update(film);
         }
@@ -37,7 +37,7 @@ namespace FilmPool.Services
             return await _filmsRepository.Delete(id);
         }
 
-        public async Task<int> CreateFilm(FilmUpdateRequestModel film)
+        public async Task<int> CreateFilm(Film film)
         {
             return await _filmsRepository.CreateFilm(film);
         } 

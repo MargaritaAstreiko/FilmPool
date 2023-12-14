@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Org.BouncyCastle.Utilities;
 using System.Drawing;
 using Microsoft.AspNet.Identity;
+using AutoMapper;
 
 namespace FilmPool.Controllers
 {
@@ -19,10 +20,12 @@ namespace FilmPool.Controllers
     public class FilmsController : Controller
     {
         IFilmsService _filmsService;
+        private readonly IMapper _mapper;
 
-        public FilmsController(IFilmsService filmsService)
+        public FilmsController(IFilmsService filmsService, IMapper mapper)
         {
             _filmsService = filmsService;
+            _mapper = mapper;
         }
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] FilmsRequestModel filmsRequestModel)
@@ -59,8 +62,9 @@ namespace FilmPool.Controllers
 
         [HttpPost("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateFilm([FromBody] FilmUpdateRequestModel film)
+        public async Task<IActionResult> UpdateFilm([FromBody] FilmUpdateRequestModel filmReq)
         {
+            var film = _mapper.Map<Film>(filmReq);
             var res = await _filmsService.Update(film);
             return Ok(res);
         }
@@ -68,8 +72,9 @@ namespace FilmPool.Controllers
 
         [HttpPost("new")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> CreateFilm([FromBody] FilmUpdateRequestModel film)
+        public async Task<IActionResult> CreateFilm([FromBody] FilmUpdateRequestModel filmReq)
         {
+            var film = _mapper.Map<Film>(filmReq);
             var res = await _filmsService.CreateFilm(film);
             return Ok(res);
         }
