@@ -23,6 +23,7 @@ export class FilmCreateComponent implements OnInit {
     fileToUpload: File | null | undefined;
     url: any;
     eGenre = Genre;
+    genres = Object.keys(this.eGenre).filter(k => !isNaN(Number(k)));
     description ='';
     genre!: Genre;
     filmcontent!: FormGroup;
@@ -42,9 +43,11 @@ export class FilmCreateComponent implements OnInit {
             year: new FormControl(''),
             duration: new FormControl(''),
             genre: new FormControl(''),
+            filmUrl: new FormControl(''),
 
         })
         this.url = "/assets/nofilm.png";
+        console.log(this.genres)
 
     }
 
@@ -80,7 +83,8 @@ export class FilmCreateComponent implements OnInit {
             duration: filmInfo.duration,
             genre: +filmInfo.genre,
             rating: 0,
-            picture: ''
+            picture: '',
+            filmUrl: filmInfo.filmUrl,
         }
 
         this._filmsService.createFilm(filmUpdateInfo).subscribe(data=>{

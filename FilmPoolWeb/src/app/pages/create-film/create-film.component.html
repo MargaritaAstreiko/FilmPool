@@ -22,11 +22,15 @@
                 <div>
                     <input type="number" id="year" formControlName="year" class="form-control" min="1940" max="2045">
                 </div>
+                <label for="filmUrl">Ссылка на фильм:</label>
+                <div>
+                    <input type="text" id="filmUrl" formControlName="filmUrl" class="form-control">
+                </div>
                 <div>
                     <label for="genre">Жанр:</label>
                     <select id="genre" name="genre" formControlName="genre">
                         <option [ngValue]="null">Выберите жанр</option>
-                        <option *ngFor="let type of eGenre| keyvalue" [ngValue]="type.key">{{type.value}}</option>
+                        <option *ngFor="let type of genres " [ngValue]="type" [label]= 'eGenre[+type]'></option>
                     </select>
                 </div>
                 <label for="duration">Продолжительность:</label>

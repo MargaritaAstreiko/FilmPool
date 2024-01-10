@@ -62,3 +62,12 @@ label {
     justify-content: space-around;
     margin-left: 10px;
 }
+
+.save-comment{
+    color: orange;
+    margin-left: 12px;
+}
+
+.comment-form{
+    display: flex;
+}

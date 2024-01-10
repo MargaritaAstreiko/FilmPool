@@ -3,39 +3,44 @@
     <div *ngIf="!(isAdmin&&editMode)" class="film-container">
         <div class="coll-info">
             <div class="add-to-collection">
-            <div class="add-collection">
-                <button class="btn" *ngIf="!addToCollection" (click)="addFilmToCollection()">Добавить в
-                    коллекцию</button>
+                <div class="add-collection">
+                    <button class="btn" *ngIf="!addToCollection" (click)="addFilmToCollection()">Добавить в
+                        коллекцию</button>
+                </div>
+                <div *ngIf="addToCollection" class="collection-add-form">
+                    <button class="btn btn-coll" (click)="saveToCollection()">Добавить</button>
+                    <label for="collectionName">Название коллекции</label>
+                    <select name="collectionItem" (change)="filterChanged($event)">
+                        <option [value]="null">Выберите коллекцию</option>
+                        <option *ngFor="let collection of collections" [value]="collection.id">
+                            {{collection.collectionName}}
+                        </option>
+                    </select>
+                </div>
             </div>
-            <div *ngIf="addToCollection" class="collection-add-form">
-                <label for="collectionName">Название коллекции</label>
-                <select name="collectionItem" (change)="filterChanged($event)">
-                    <option [value]="null">Выберите коллекцию</option>
-                    <option *ngFor="let collection of collections" [value]="collection.id">{{collection.collectionName}}
-                    </option>
-                </select>
-                <button class="btn btn-coll" (click)="saveToCollection()">Добавить</button>
-            </div>
-        </div>
-           <div class="film-info-full"> 
-            <div class="header">
-                <div class="title">{{film.title}}</div> <i-bs *ngIf="isAdmin" class="form-btns" width="1.2rem" height="1.2rem" (click)="enableEditMode()" name="pencil"></i-bs>
-            </div>
+            <div class="film-info-full">
+                <div class="header">
+                    <div class="title">{{film.title}}</div> <i-bs *ngIf="isAdmin" class="form-btns" width="1.2rem"
+                        height="1.2rem" (click)="enableEditMode()" name="pencil"></i-bs>
+                </div>
 
-            <img [src]="url" height="200" width="240" *ngIf="url">
-            <div class="filminfo">Жанр: {{genreConvention(film.genre)}}</div>
-            <div class="filminfo">Год: {{film.year}}</div>
-            <div class="filminfo">Рейтинг: {{rating}}</div>
-            <div class="filminfo-desc"><p>{{film.description}}</p></div>
+                <img [src]="url" height="200" width="240" *ngIf="url">
+                <div class="filminfo">Жанр: {{genreConvention(film.genre)}}</div>
+                <div class="filminfo">Год: {{film.year}}</div>
+                <div class="filminfo">Рейтинг: {{rating}}</div>
+                <div class="filminfo-desc">
+                    <p>{{film.description}}</p>
+                </div>
+            </div>
         </div>
-        </div>
-        <app-video-player #filmVideoPlayer></app-video-player>
+        <app-video-player #filmVideoPlayer [filmUrl]="film.filmUrl"></app-video-player>
     </div>
 
     <div *ngIf="isAdmin&&editMode" class="card">
         <div class="card-body">
             <form [formGroup]="filmcontent" id="filmcontent" (ngSubmit)="updateFilm(filmcontent.value)">
-                <i-bs class="form-btns"(click)="updateFilm(filmcontent.value)" width="1.2rem" height="1.2rem" name="save"></i-bs>
+                <i-bs class="form-btns" (click)="updateFilm(filmcontent.value)" width="1.2rem" height="1.2rem"
+                    name="save"></i-bs>
                 <div>
                     <label for="title">Название:</label>
                     <div>
@@ -43,17 +48,21 @@
                             [(ngModel)]="film.title" />
                     </div>
                     <div class="img-lab">
-                    <label for="fileInput">Избражение:</label>
-                    <img [src]="url" height="200" *ngIf="url">
-                    <div>
-                        <input #fileInput id="fileInput" type='file' value="" (change)="onSelectFile($event)"
-                            accept=".jpg, .jpeg, .png">
-                    </div>
+                        <label for="fileInput">Избражение:</label>
+                        <img [src]="url" height="200" *ngIf="url">
+                        <div>
+                            <input #fileInput id="fileInput" type='file' value="" (change)="onSelectFile($event)"
+                                accept=".jpg, .jpeg, .png">
+                        </div>
                     </div>
                     <label for="year">Год:</label>
                     <div>
                         <input type="number" id="year" formControlName="year" class="form-control" min="1940" max="2045"
                             [(ngModel)]="film.year">
+                    </div>
+                    <label for="filmUrl">Ссылка на фильм:</label>
+                    <div>
+                        <input type="text" id="filmUrl" formControlName="filmUrl" class="form-control">
                     </div>
                     <label for="duration">Продолжительность:</label>
                     <div>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as Plyr from 'plyr';
+
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
@@ -9,7 +10,7 @@ export class VideoPlayerComponent implements OnInit {
   videoItems = [
       {
         name: 'Video one',
-        src: 'http://static.videogular.com/assets/videos/videogular.mp4',
+        src: 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4',
         type: 'video/mp4'
       },
       {
@@ -23,18 +24,36 @@ export class VideoPlayerComponent implements OnInit {
         type: 'video/mp4'
       }
     ];
+
+    @Input() filmUrl!: string;
     activeIndex = 0;
     currentVideo = this.videoItems[this.activeIndex];
     data: any;
     player: any;
+    src!: string;
+
     constructor() { }
     ngOnInit(): void {
       this.player = new Plyr('#plyrID', {  debug: true,
         volume: 0,
         autoplay: true,
         muted:false,
-        loop: { active: true }, } );
-    }
+        loop: { active: true },
+       } );
+       this.player.source = {
+        type: 'video',
+        title: 'Example title',
+        sources: [
+         {
+              src: this.filmUrl? this.filmUrl : this.currentVideo.src,
+              type: 'video/mp4',
+              size: 720
+          }
+        ],
+      };
+
+  };
+    
     videoPlayerInit(data: any) {
       this.data = data;
       this.data.getDefaultMedia().subscriptions.loadedMetadata.subscribe(this.initVdo.bind(this));

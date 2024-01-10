@@ -10,5 +10,6 @@ export class Film {
     description!: string;
     picture!: string;
     rating!: number;
+    filmUrl!: string;
 
 }

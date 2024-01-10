@@ -59,6 +59,7 @@ export class FilmComponent implements OnInit {
             fileInput: new FormControl(''),
             year: new FormControl(''),
             duration: new FormControl(''),
+            filmUrl: new FormControl(''),
 
         })
         this._collectionsService.getCollection(+this.userId).subscribe(data => {
@@ -122,7 +123,8 @@ export class FilmComponent implements OnInit {
             duration: filmInfo.duration,
             genre: this.film.genre,
             rating: 0,
-            picture: ''
+            picture: '',
+            filmUrl: filmInfo.filmUrl,
         }
 
         if (this.fileToUpload?.name) {

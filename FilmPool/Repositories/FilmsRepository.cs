@@ -76,6 +76,7 @@ namespace FilmPool.Repositories
             currentFilm.Duration = film.Duration;
             currentFilm.Year = film.Year;
             currentFilm.Description = film.Description;
+            currentFilm.FilmUrl= film.FilmUrl;
 
             Context.Films.Update(currentFilm);
             await Context.SaveChangesAsync();
@@ -117,6 +118,7 @@ namespace FilmPool.Repositories
                 Duration = film.Duration,
                 Year = film.Year,
                 Description = film.Description,
+                FilmUrl = film.FilmUrl,
             });
             await Context.SaveChangesAsync();
             return newfilm.Entity.Id;
